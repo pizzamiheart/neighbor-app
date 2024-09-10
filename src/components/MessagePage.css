@@ -105,10 +105,17 @@
 
 .message-page .button-container button {
     padding: 10px 20px;
-    background-color: #4267B2;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+}
+
+.message-page .button-container button:first-child {
+    background-color: #4267B2;
+}
+
+.message-page .button-container button:last-child {
+    background-color: #D32F2F;
 }
