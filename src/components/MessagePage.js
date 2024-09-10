@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import './MessagePage.css';
 
 function MessagePage() {
   const [messages, setMessages] = useState([]);
@@ -32,16 +34,39 @@ function MessagePage() {
       });
       const data = await response.json();
       setIsTyping(false);
-      setMessages(prev => [...prev, { sender: 'bot', text: data.message }]);
+      typeMessage(data.message);
     } catch (error) {
       console.error('Error sending message:', error);
       setIsTyping(false);
-      setMessages(prev => [...prev, { sender: 'bot', text: "I'm sorry, I'm having trouble responding right now. Please try again later." }]);
+      typeMessage("I'm sorry, I'm having trouble responding right now. Please try again later.");
     }
+  };
+
+  const typeMessage = (message) => {
+    let i = 0;
+    const typingInterval = setInterval(() => {
+      if (i < message.length) {
+        setMessages(prev => {
+          const newMessages = [...prev];
+          if (newMessages[newMessages.length - 1].sender === 'bot') {
+            newMessages[newMessages.length - 1].text += message[i];
+          } else {
+            newMessages.push({ sender: 'bot', text: message[i] });
+          }
+          return newMessages;
+        });
+        i++;
+      } else {
+        clearInterval(typingInterval);
+      }
+    }, 50); // Adjust this value to change typing speed
   };
 
   return (
     <div className="message-page">
+      <nav>
+        <Link to="/">Home</Link> | <Link to="/message">Message Neighbor</Link> | <Link to="/call">Call Neighbor</Link>
+      </nav>
       <h2>Chat with Neighbor</h2>
       <div className="chat-container">
         <div className="prompts">
@@ -58,16 +83,16 @@ function MessagePage() {
           {isTyping && <div className="typing-indicator">...</div>}
         </div>
         <div className="input-container">
-          <input
-            type="text"
+          <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your message..."
-            onKeyPress={(e) => e.key === 'Enter' && sendMessage(input)}
+            onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage(input)}
           />
-          <button onClick={() => sendMessage(input)}>Send</button>
-          <button onClick={() => setMessages([])}>Clear Chat</button>
-          <input type="file" accept="image/*" />
+          <div className="button-container">
+            <button onClick={() => sendMessage(input)}>Send</button>
+            <button onClick={() => setMessages([])}>Clear Chat</button>
+          </div>
         </div>
       </div>
     </div>
