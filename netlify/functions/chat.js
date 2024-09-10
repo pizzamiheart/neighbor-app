@@ -1,9 +1,8 @@
-const { Configuration, OpenAIApi } = require("openai");
+const OpenAI = require('openai');
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
 });
-const openai = new OpenAIApi(configuration);
 
 exports.handler = async function(event, context) {
   if (event.httpMethod !== "POST") {
@@ -12,16 +11,20 @@ exports.handler = async function(event, context) {
 
   try {
     const { message } = JSON.parse(event.body);
-    const completion = await openai.createChatCompletion({
+    const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [{ role: "user", content: message }],
     });
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ success: true, message: completion.data.choices[0].message.content }),
+      body: JSON.stringify({ message: completion.choices[0].message.content }),
     };
   } catch (error) {
-    return { statusCode: 500, body: JSON.stringify({ success: false, error: error.message }) };
+    console.error('Error:', error);
+    return { 
+      statusCode: 500, 
+      body: JSON.stringify({ error: 'An error occurred while processing your request.' }) 
+    };
   }
 };
