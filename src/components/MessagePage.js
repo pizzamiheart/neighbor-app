@@ -25,10 +25,10 @@ function MessagePage() {
     setIsTyping(true);
 
     try {
-      const response = await fetch('http://localhost:5001/api/chat', { // Updated port to 5001
+      const response = await fetch('/.netlify/functions/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message })
+        body: JSON.stringify({ message: message }),
       });
       const data = await response.json();
       setIsTyping(false);
