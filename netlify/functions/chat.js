@@ -1,7 +1,10 @@
 const OpenAI = require('openai');
 
+console.log("API Key available:", !!process.env.OPENAI_API_KEY);
+console.log("API Key starts with:", process.env.OPENAI_API_KEY?.substring(0, 4));
+
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+  apiKey: process.env.OPENAI_API_KEY 
 });
 
 exports.handler = async function(event, context) {
