@@ -130,6 +130,6 @@ body, html {
   
   .typing-indicator {
     font-style: italic;
-    color: #888;
+    color: #888; 
     margin-bottom: 10px;
   }

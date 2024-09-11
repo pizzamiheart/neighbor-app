@@ -6,7 +6,6 @@ function MessagePage() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [chatKey, setChatKey] = useState(0);
   const chatBoxRef = useRef(null);
 
   const prompts = [
@@ -60,14 +59,13 @@ function MessagePage() {
       } else {
         clearInterval(typingInterval);
       }
-    }, 50); // Adjust this value to change typing speed
+    }, 50);
   };
 
   const clearChat = () => {
     setMessages([]);
     setInput('');
-    setIsTyping(false); // Reset typing indicator
-    setChatKey(prevKey => prevKey + 1);
+    setIsTyping(false);
   };
 
   return (
@@ -76,7 +74,7 @@ function MessagePage() {
         <Link to="/">Home</Link> | <Link to="/message">Message Neighbor</Link> | <Link to="/call">Call Neighbor</Link>
       </nav>
       <h2>Chat with Neighbor</h2>
-      <div className="chat-container" key={chatKey}>
+      <div className="chat-container">
         <div className="prompts">
           {prompts.map((prompt, index) => (
             <button key={index} onClick={() => sendMessage(prompt)}>{prompt}</button>
@@ -88,7 +86,7 @@ function MessagePage() {
               {message.text}
             </div>
           ))}
-          {isTyping && <div className="typing-indicator">...</div>}
+          {isTyping && <div className="typing-indicator">Neighbor is typing...</div>}
         </div>
         <div className="input-container">
           <textarea
