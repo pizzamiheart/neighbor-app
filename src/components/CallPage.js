@@ -11,7 +11,7 @@ function CallPage() {
       return;
     }
 
-    setCallStatus('Initiating call...');
+    setCallStatus('Grab your phone! Neighbor is giving you a call');
 
     try {
       const response = await fetch('/.netlify/functions/call', {
@@ -21,9 +21,7 @@ function CallPage() {
       });
       const data = await response.json();
       
-      if (response.ok && data.callId) {
-        setCallStatus(`Call initiated successfully. Call ID: ${data.callId}`);
-      } else {
+      if (!response.ok) {
         setCallStatus(`Error: ${data.error || 'Failed to initiate call'}`);
       }
     } catch (error) {
@@ -34,15 +32,18 @@ function CallPage() {
 
   return (
     <div className="call-page">
-      <h3>If you'd like to speak to Neighbor, enter your phone number to receive a call and talk through your tech issues.</h3>
-      <p>Neighbor is an artificial intelligence designed to be always available and helpful. It's most helpful when you provide more detail of what you're experiencing.</p>
-      <input
-        type="tel"
-        value={phoneNumber}
-        onChange={(e) => setPhoneNumber(e.target.value)}
-        placeholder="+1 (123) 456-7890"
-      />
-      <button onClick={initiateCall}>Start Call</button>
+      <h1>Ready to Call Your Neighbor?</h1>
+      <h3>whatever your technical issues or questions are, Neighbor can help you troubleshoot!</h3>
+      <div className="input-container">
+        <input
+          type="tel"
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+          placeholder="+1 (123) 456-7890"
+        />
+        <p>Neighbor is an artificial intelligence designed to be always available and helpful. It's most helpful when you provide more detail of what you're experiencing.</p>
+        <button onClick={initiateCall}>Start Call</button>
+      </div>
       <div className="call-status">{callStatus}</div>
     </div>
   );

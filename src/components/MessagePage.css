@@ -1,6 +1,5 @@
 .message-page {
-    max-width: 800px;
-    width: 90%;
+    width: 70%;
     margin: 0 auto;
     padding: 20px;
     height: 80vh;
@@ -8,96 +7,99 @@
     flex-direction: column;
 }
 
-.message-page .chat-container {
+.chat-container {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     width: 100%;
 }
 
-.message-page .prompts {
+.prompts {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     margin-bottom: 20px;
+    max-width: 600px;
 }
 
-.message-page .prompts button {
-    padding: 15px 20px;
+.prompts button {
+    padding: 10px 15px;
     background-color: #4267B2;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 14px;
     white-space: normal;
     height: auto;
 }
 
-.message-page .chat-box {
+.chat-box {
     flex-grow: 1;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 10px;
     overflow-y: auto;
     margin-bottom: 20px;
+    width: 100%;
 }
 
-.message-page .message {
+.message {
     margin-bottom: 15px;
     padding: 10px 15px;
     border-radius: 15px;
-    max-width: 80%;
+    max-width: 70%;
     word-wrap: break-word;
 }
 
-.message-page .message.user {
+.message.user {
     background-color: #4267B2;
     color: white;
     align-self: flex-end;
 }
 
-.message-page .message.bot {
+.message.bot {
     background-color: #e9eaed;
     color: black;
     align-self: flex-start;
 }
 
-.message-page .input-container {
+.input-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
-.message-page textarea {
-    width: 100%;
+textarea {
+    width: 80%;
     height: 80px;
     padding: 15px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
     resize: none;
-    font-size: 18px;
+    font-size: 16px;
 }
 
-.message-page .button-container {
+.button-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 20px;
 }
 
-.message-page .button-container button {
-    padding: 15px 30px;
+.button-container button {
+    padding: 10px 20px;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
     cursor: pointer;
-    font-size: 20px;
-    width: 48%;
+    font-size: 16px;
 }
 
-.message-page .button-container button:first-child {
+.button-container button:first-child {
     background-color: #4267B2;
 }
 
-.message-page .button-container button:last-child {
+.button-container button:last-child {
     background-color: #D32F2F;
 }

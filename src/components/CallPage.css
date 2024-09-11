@@ -3,9 +3,9 @@
     width: 90%;
     margin: 0 auto;
     padding: 20px;
-    height: 80vh;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .call-container {
@@ -15,32 +15,38 @@
     width: 100%;
 }
 
-.call-page h2 {
-    font-size: 24px;
+.call-page h1 {
+    font-size: 28px;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .call-page h3 {
     font-size: 20px;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .call-page p {
     font-size: 16px;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .input-container {
     display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 20px;
 }
 
 .call-page input {
-    flex-grow: 1;
+    width: 200px;
     padding: 10px;
     font-size: 18px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    margin-right: 10px;
 }
 
 .call-page button {
@@ -51,10 +57,12 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-left: 10px;
+    white-space: nowrap;
 }
 
 .call-status {
     font-size: 18px;
     margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
 }
