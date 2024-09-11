@@ -65,7 +65,12 @@ function MessagePage() {
   const clearChat = () => {
     setMessages([]);
     setInput('');
+    setIsTyping(false); // Reset typing indicator
+    // Force a re-render by updating a state
+    setForceUpdate(prev => !prev);
   };
+
+  const [forceUpdate, setForceUpdate] = useState(false);
 
   return (
     <div className="message-page">
