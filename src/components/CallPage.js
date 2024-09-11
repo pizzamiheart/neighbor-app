@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './CallPage.css';
 
 function CallPage() {
   const [phoneNumber, setPhoneNumber] = useState('');
