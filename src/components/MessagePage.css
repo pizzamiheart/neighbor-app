@@ -7,6 +7,15 @@
     flex-direction: column;
 }
 
+.message-page nav {
+    margin-bottom: 20px;
+}
+
+.message-page h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 .chat-container {
     display: flex;
     flex-direction: column;
@@ -19,7 +28,6 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     margin-bottom: 20px;
-    max-width: 600px;
 }
 
 .prompts button {
@@ -27,7 +35,7 @@
     background-color: #4267B2;
     color: white;
     border: none;
-    border-radius: 25px;
+    border-radius: 20px;
     cursor: pointer;
     font-size: 14px;
     white-space: normal;
@@ -47,7 +55,7 @@
 .message {
     margin-bottom: 15px;
     padding: 10px 15px;
-    border-radius: 15px;
+    border-radius: 20px;
     max-width: 70%;
     word-wrap: break-word;
 }
@@ -56,6 +64,7 @@
     background-color: #4267B2;
     color: white;
     align-self: flex-end;
+    margin-left: auto;
 }
 
 .message.bot {
@@ -91,7 +100,7 @@ textarea {
     padding: 10px 20px;
     color: white;
     border: none;
-    border-radius: 25px;
+    border-radius: 20px;
     cursor: pointer;
     font-size: 16px;
 }
@@ -102,4 +111,10 @@ textarea {
 
 .button-container button:last-child {
     background-color: #D32F2F;
+}
+
+.typing-indicator {
+    font-style: italic;
+    color: #888;
+    margin-bottom: 10px;
 }

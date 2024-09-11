@@ -64,6 +64,7 @@ function MessagePage() {
 
   const clearChat = () => {
     setMessages([]);
+    setInput('');
   };
 
   return (
