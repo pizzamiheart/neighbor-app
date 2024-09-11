@@ -6,6 +6,7 @@ function MessagePage() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [chatKey, setChatKey] = useState(0);
   const chatBoxRef = useRef(null);
 
   const prompts = [
@@ -66,11 +67,8 @@ function MessagePage() {
     setMessages([]);
     setInput('');
     setIsTyping(false); // Reset typing indicator
-    // Force a re-render by updating a state
-    setForceUpdate(prev => !prev);
+    setChatKey(prevKey => prevKey + 1);
   };
-
-  const [forceUpdate, setForceUpdate] = useState(false);
 
   return (
     <div className="message-page">
@@ -78,7 +76,7 @@ function MessagePage() {
         <Link to="/">Home</Link> | <Link to="/message">Message Neighbor</Link> | <Link to="/call">Call Neighbor</Link>
       </nav>
       <h2>Chat with Neighbor</h2>
-      <div className="chat-container">
+      <div className="chat-container" key={chatKey}>
         <div className="prompts">
           {prompts.map((prompt, index) => (
             <button key={index} onClick={() => sendMessage(prompt)}>{prompt}</button>
