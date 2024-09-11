@@ -62,6 +62,10 @@ function MessagePage() {
     }, 50); // Adjust this value to change typing speed
   };
 
+  const clearChat = () => {
+    setMessages([]);
+  };
+
   return (
     <div className="message-page">
       <nav>
@@ -91,7 +95,7 @@ function MessagePage() {
           />
           <div className="button-container">
             <button onClick={() => sendMessage(input)}>Send</button>
-            <button onClick={() => setMessages([])}>Clear Chat</button>
+            <button onClick={clearChat}>Clear Chat</button>
           </div>
         </div>
       </div>

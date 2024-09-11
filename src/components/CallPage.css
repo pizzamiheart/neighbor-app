@@ -1,0 +1,60 @@
+.call-page {
+    max-width: 800px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.call-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.call-page h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.call-page h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.call-page p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.input-container {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.call-page input {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.call-page button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #4267B2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.call-status {
+    font-size: 18px;
+    margin-top: 20px;
+}
