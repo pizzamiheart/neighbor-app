@@ -18,7 +18,6 @@ exports.handler = async function(event, context) {
       model: "enhanced",
       language: "en",
       voice: "nat",
-      pathway_id: process.env.BLAND_PATHWAY_ID,
       max_duration: 12
     }, {
       headers: {
