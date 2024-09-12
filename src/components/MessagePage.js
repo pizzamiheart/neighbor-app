@@ -8,11 +8,11 @@ function MessagePage() {
   const [isTyping, setIsTyping] = useState(false);
   const chatBoxRef = useRef(null);
 
-  const prompts = [
-    "How do I turn on my computer?",
-    "My internet isn't working",
-    "How do I send an email?",
-    "My printer isn't printing"
+  const commonIssues = [
+    { prompt: "How do I reset my Wi-Fi router?", label: "Reset Wi-Fi Router" },
+    { prompt: "My computer is running slow. What can I do?", label: "Slow Computer" },
+    { prompt: "How do I update my smartphone's operating system?", label: "Update Smartphone" },
+    { prompt: "I'm running out of iCloud storage. What should I do?", label: "iCloud Storage" }
   ];
 
   useEffect(() => {
@@ -22,7 +22,11 @@ function MessagePage() {
   }, [messages]);
 
   const sendMessage = async (message) => {
-    setMessages(prev => [...prev, { sender: 'user', text: message }]);
+    if (isTyping) {
+      alert("Just a moment while we finish your other question :)");
+      return;
+    }
+    addMessageToChat('You', message);
     setInput('');
     setIsTyping(true);
 
@@ -34,32 +38,39 @@ function MessagePage() {
       });
       const data = await response.json();
       setIsTyping(false);
-      typeMessage(data.message);
+      await typeMessage(data.message, 'Neighbor');
     } catch (error) {
       console.error('Error sending message:', error);
       setIsTyping(false);
-      typeMessage("I'm sorry, I'm having trouble responding right now. Please try again later.");
+      addMessageToChat('Neighbor', "Sorry, I encountered an error. Please try again.");
     }
   };
 
-  const typeMessage = (message) => {
-    let i = 0;
-    const typingInterval = setInterval(() => {
-      if (i < message.length) {
-        setMessages(prev => {
-          const newMessages = [...prev];
-          if (newMessages[newMessages.length - 1].sender === 'bot') {
-            newMessages[newMessages.length - 1].text += message[i];
-          } else {
-            newMessages.push({ sender: 'bot', text: message[i] });
-          }
-          return newMessages;
-        });
-        i++;
-      } else {
-        clearInterval(typingInterval);
-      }
-    }, 50);
+  const addMessageToChat = (sender, message) => {
+    setMessages(prev => [...prev, { sender, text: message }]);
+  };
+
+  const typeMessage = (message, sender) => {
+    return new Promise((resolve) => {
+      let i = 0;
+      const intervalId = setInterval(() => {
+        if (i < message.length) {
+          setMessages(prev => {
+            const newMessages = [...prev];
+            if (newMessages[newMessages.length - 1].sender === sender) {
+              newMessages[newMessages.length - 1].text += message[i];
+            } else {
+              newMessages.push({ sender, text: message[i] });
+            }
+            return newMessages;
+          });
+          i++;
+        } else {
+          clearInterval(intervalId);
+          resolve();
+        }
+      }, 30);
+    });
   };
 
   const clearChat = () => {
@@ -70,35 +81,47 @@ function MessagePage() {
 
   return (
     <div className="message-page">
-      <nav>
-        <Link to="/">Home</Link> | <Link to="/message">Message Neighbor</Link> | <Link to="/call">Call Neighbor</Link>
-      </nav>
-      <h2>Chat with Neighbor</h2>
+      <header>
+        <nav>
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/message">Chat with AI</Link></li>
+            <li><Link to="/call">Speak Live</Link></li>
+          </ul>
+        </nav>
+      </header>
+      <h1>Neighbor</h1>
+      <h2>Your Friendly Tech Assistant</h2>
       <div className="chat-container">
-        <div className="prompts">
-          {prompts.map((prompt, index) => (
-            <button key={index} onClick={() => sendMessage(prompt)}>{prompt}</button>
+        <div className="common-issues">
+          <h3>Common Issues</h3>
+          {commonIssues.map((issue, index) => (
+            <button key={index} onClick={() => sendMessage(issue.prompt)}>{issue.label}</button>
           ))}
         </div>
-        <div className="chat-box" ref={chatBoxRef}>
-          {messages.map((message, index) => (
-            <div key={index} className={`message ${message.sender}`}>
-              {message.text}
-            </div>
-          ))}
-          {isTyping && <div className="typing-indicator">Neighbor is typing...</div>}
-        </div>
-        <div className="input-container">
+        <div className="chat-box">
+          <div id="chat-messages" ref={chatBoxRef}>
+            {messages.map((message, index) => (
+              <div key={index} className={`message ${message.sender.toLowerCase()}`}>
+                <strong>{message.sender}:</strong> {message.text}
+              </div>
+            ))}
+            {isTyping && (
+              <div id="typing-indicator">
+                <span></span><span></span><span></span>
+              </div>
+            )}
+          </div>
           <textarea
+            id="user-input"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Type your message..."
+            placeholder="Type your question here..."
+            rows="3"
             onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage(input)}
           />
-          <div className="button-container">
-            <button onClick={() => sendMessage(input)}>Send</button>
-            <button onClick={clearChat}>Clear Chat</button>
-          </div>
+          <button id="send-button" onClick={() => sendMessage(input)}>Send</button>
+          <button id="clear-button" onClick={clearChat}>Clear Chat</button>
         </div>
       </div>
     </div>
