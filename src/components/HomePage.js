@@ -1,22 +1,46 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './HomePage.css';
 
 function HomePage() {
   return (
     <div className="home-page">
-      <h1>Welcome to Neighbor!</h1>
-      <h3>What if you could call one person who is always avaialbe and knows everything there is to know about your technology?</h3>
-      <h3>well, that person doesn't exist but you can call your personal tech assisant Neighbor! An AI who's already around and ready to help!</h3>
-      <h2>When your printer won't print, or you can't connect to your WiFi, it's hard to know who to call.</h2>
-      <h2>Neighbor eliminates that problem by being a message or a call away</h2>
-      <div className="button-container">
-        <Link to="/message" className="button">
-          Message Neighbor
-        </Link>
-        <Link to="/call" className="button">
-          Call Neighbor
-        </Link>
-      </div>
+      <header>
+        <nav>
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/message">Chat with AI</Link></li>
+            <li><Link to="/call">Speak Live</Link></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <h1>Welcome to Neighbor!</h1>
+        <div className="statements-container">
+          <div className="statement">
+            <p>What if you could call one person who is always available and knows everything there is to know about your technology?</p>
+          </div>
+          <div className="statement">
+            <p>Well, that person doesn't exist but you can call your personal tech assistant Neighbor! An AI who's already around and ready to help!</p>
+          </div>
+        </div>
+        <div className="info-container">
+          <div className="info">
+            <p>When your printer won't print, or you can't connect to your WiFi, it's hard to know who to call.</p>
+          </div>
+          <div className="info">
+            <p>Neighbor eliminates that problem by being a message or a call away</p>
+          </div>
+        </div>
+        <div className="button-container">
+          <Link to="/message" className="button">
+            Message Neighbor
+          </Link>
+          <Link to="/call" className="button">
+            Call Neighbor
+          </Link>
+        </div>
+      </main>
     </div>
   );
 }
