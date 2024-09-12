@@ -33,10 +33,16 @@ function CallPage() {
 
   return (
     <div className="call-page">
-      <nav>
-        <Link to="/">Home</Link> | <Link to="/message">Message Neighbor</Link> | <Link to="/call">Call Neighbor</Link>
-      </nav>
-      <div className="call-container">
+      <header>
+        <nav>
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/message">Chat with AI</Link></li>
+            <li><Link to="/call">Speak Live</Link></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
         <h1>Ready to Call Your Neighbor?</h1>
         <h3>Whatever your technical issues or questions are, Neighbor can help you troubleshoot!</h3>
         <div className="input-container">
@@ -50,7 +56,7 @@ function CallPage() {
         </div>
         <p>Neighbor is an artificial intelligence designed to be always available and helpful. It's most helpful when you provide more detail of what you're experiencing.</p>
         <div className="call-status">{callStatus}</div>
-      </div>
+      </main>
     </div>
   );
 }
