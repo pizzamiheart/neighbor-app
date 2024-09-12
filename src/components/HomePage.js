@@ -21,15 +21,17 @@ function HomePage() {
             <p>What if you could call one person who is always available and knows everything there is to know about your technology?</p>
           </div>
           <div className="statement">
-            <p>Well, that person doesn't exist but you can call your personal tech assistant Neighbor! An AI who's already around and ready to help!</p>
+            <p>Well, that person doesn't exist but you can call your personal tech assistant Neighbor!</p> 
+            <p>Neighbor is an AI who's always around and ready to help!</p>
           </div>
         </div>
         <div className="info-container">
           <div className="info">
-            <p>When your printer won't print, or you can't connect to your WiFi, it's hard to know who to call.</p>
+            <p>Printer won't print? Can't connect to your WiFi? Locked out of an account?</p> 
+            <p>It's hard to know who to call to fix it quickly!</p>
           </div>
           <div className="info">
-            <p>Neighbor eliminates that problem by being a message or a call away</p>
+            <p>Neighbor eliminates that problem by being a message or a call away!</p>
           </div>
         </div>
         <div className="button-container">
