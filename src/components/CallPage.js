@@ -12,22 +12,27 @@ function CallPage() {
       return;
     }
 
-    setCallStatus('Grab your phone! Neighbor is giving you a call');
+    setCallStatus('Initiating call...');
 
     try {
+      console.log('Sending request to serverless function');
       const response = await fetch('/.netlify/functions/call', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phoneNumber: phoneNumber }),
       });
+      console.log('Received response from serverless function', response.status);
       const data = await response.json();
+      console.log('Response data:', data);
       
       if (!response.ok) {
-        setCallStatus(`Error: ${data.error || 'Failed to initiate call'}`);
+        setCallStatus(`Error: ${JSON.stringify(data.error) || 'Failed to initiate call'}`);
+      } else {
+        setCallStatus(`Call initiated successfully. Call ID: ${data.callId}`);
       }
     } catch (error) {
       console.error('Error initiating call:', error);
-      setCallStatus('Error initiating call. Please try again.');
+      setCallStatus(`Error initiating call: ${error.message}. Please try again.`);
     }
   };
 
