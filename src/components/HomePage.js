@@ -16,6 +16,7 @@ function HomePage() {
       </header>
       <main>
         <h1 className="welcome-heading">Welcome to Neighbor!</h1>
+        <p className="subheading">an always-avaialable AI assistant to cure your tech woes</p>
         <div className="button-container">
           <Link to="/message" className="button">
             Message Neighbor
