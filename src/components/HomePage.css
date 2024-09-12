@@ -147,6 +147,5 @@ body, html {
   }
   
   .welcome-heading {
-    margin-top: 20px; /* Adjust this value as needed */
-    /* ... other styles ... */
+    margin-top: 50px; /* Adjust this value as needed */
   }
