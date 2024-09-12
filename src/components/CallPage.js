@@ -6,9 +6,22 @@ function CallPage() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [callStatus, setCallStatus] = useState('');
 
+  const handlePhoneChange = (e) => {
+    // Remove any non-digit characters from the input
+    const cleaned = e.target.value.replace(/\D/g, '');
+    // Limit to 10 digits
+    const trimmed = cleaned.slice(0, 10);
+    // Format the number as (XXX) XXX-XXXX
+    const formatted = trimmed.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+    setPhoneNumber(formatted);
+  };
+
   const initiateCall = async () => {
-    if (!/^\+1\d{10}$/.test(phoneNumber)) {
-      setCallStatus('Please enter a valid phone number in the format +1123456789');
+    // Remove formatting and add +1 prefix
+    const fullNumber = '+1' + phoneNumber.replace(/\D/g, '');
+
+    if (fullNumber.length !== 12) {
+      setCallStatus('Please enter a valid 10-digit phone number');
       return;
     }
 
@@ -18,7 +31,7 @@ function CallPage() {
       const response = await fetch('/.netlify/functions/call', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phoneNumber: phoneNumber }),
+        body: JSON.stringify({ phoneNumber: fullNumber }),
       });
       const data = await response.json();
       
@@ -46,12 +59,15 @@ function CallPage() {
         <h1>Ready to Call Your Neighbor?</h1>
         <h3>Whatever your technical issues or questions are, Neighbor can help you troubleshoot!</h3>
         <div className="input-container">
-          <input
-            type="tel"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            placeholder="+1 (123) 456-7890"
-          />
+          <div className="phone-input">
+            <span className="prefix">+1</span>
+            <input
+              type="tel"
+              value={phoneNumber}
+              onChange={handlePhoneChange}
+              placeholder="(123) 456-7890"
+            />
+          </div>
           <button onClick={initiateCall}>Start Call</button>
         </div>
         <p>Neighbor is an artificial intelligence designed to be always available and helpful. It's most helpful when you provide more detail of what you're experiencing.</p>

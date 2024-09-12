@@ -127,3 +127,26 @@ button:hover {
         width: 100%;
     }
 }
+
+.phone-input {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.prefix {
+    padding: 10px;
+    background-color: #f0f0f0;
+    color: #333;
+    font-weight: bold;
+}
+
+.phone-input input {
+    border: none;
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 18px;
+}
