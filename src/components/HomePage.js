@@ -15,7 +15,7 @@ function HomePage() {
         </nav>
       </header>
       <main>
-        <h1>Welcome to Neighbor!</h1>
+        <h1 className="welcome-heading">Welcome to Neighbor!</h1>
         <div className="button-container">
           <Link to="/message" className="button">
             Message Neighbor

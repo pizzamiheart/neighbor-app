@@ -145,3 +145,8 @@ body, html {
       padding: 10px;
     }
   }
+  
+  .welcome-heading {
+    margin-top: 20px; /* Adjust this value as needed */
+    /* ... other styles ... */
+  }
