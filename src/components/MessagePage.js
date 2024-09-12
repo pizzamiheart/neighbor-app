@@ -19,7 +19,7 @@ function MessagePage() {
     if (chatBoxRef.current) {
       chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, [messages]);  
 
   const sendMessage = async (message) => {
     if (isTyping) {
@@ -74,10 +74,12 @@ function MessagePage() {
   };
 
   const clearChat = () => {
-    setMessages([]);
-    setInput('');
-    setIsTyping(false);
-  };
+    console.log('Clearing chat');
+    setMessages([{ sender: 'System', text: 'Chat has been cleared.' }]);
+    console.log('Messages cleared');
+  };  
+
+  console.log('Rendering MessagePage', { messages, input, isTyping });
 
   return (
     <div className="message-page">
