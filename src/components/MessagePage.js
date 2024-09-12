@@ -6,6 +6,7 @@ function MessagePage() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const chatBoxRef = useRef(null);
 
   const commonIssues = [
@@ -23,7 +24,7 @@ function MessagePage() {
 
   const sendMessage = async (message) => {
     if (isTyping) {
-      alert("Just a moment while we finish your other question :)");
+      setShowPopup(true);
       return;
     }
     addMessageToChat('You', message);
@@ -37,12 +38,12 @@ function MessagePage() {
         body: JSON.stringify({ message: message }),
       });
       const data = await response.json();
-      setIsTyping(false);
       await typeMessage(data.message, 'Neighbor');
     } catch (error) {
       console.error('Error sending message:', error);
-      setIsTyping(false);
       addMessageToChat('Neighbor', "Sorry, I encountered an error. Please try again.");
+    } finally {
+      setIsTyping(false);
     }
   };
 
@@ -73,13 +74,13 @@ function MessagePage() {
     });
   };
 
-  const clearChat = () => {
-    console.log('Clearing chat');
-    setMessages([{ sender: 'System', text: 'Chat has been cleared.' }]);
-    console.log('Messages cleared');
-  };  
-
-  console.log('Rendering MessagePage', { messages, input, isTyping });
+  const handleCommonIssueClick = (prompt) => {
+    if (isTyping) {
+      setShowPopup(true);
+    } else {
+      sendMessage(prompt);
+    }
+  };
 
   return (
     <div className="message-page">
@@ -92,40 +93,51 @@ function MessagePage() {
           </ul>
         </nav>
       </header>
-      <h1>Neighbor</h1>
-      <h2>Your Friendly Tech Assistant</h2>
-      <div className="chat-container">
-        <div className="common-issues">
-          <h3>Common Issues</h3>
-          {commonIssues.map((issue, index) => (
-            <button key={index} onClick={() => sendMessage(issue.prompt)}>{issue.label}</button>
-          ))}
-        </div>
-        <div className="chat-box">
-          <div id="chat-messages" ref={chatBoxRef}>
-            {messages.map((message, index) => (
-              <div key={index} className={`message ${message.sender.toLowerCase()}`}>
-                <strong>{message.sender}:</strong> {message.text}
-              </div>
+      <main>
+        <h1>Neighbor</h1>
+        <h2>Your Friendly Tech Assistant</h2>
+        <div className="chat-container">
+          <div className="common-issues">
+            <h3>Common Issues</h3>
+            {commonIssues.map((issue, index) => (
+              <button key={index} onClick={() => handleCommonIssueClick(issue.prompt)}>{issue.label}</button>
             ))}
-            {isTyping && (
-              <div id="typing-indicator">
-                <span></span><span></span><span></span>
-              </div>
-            )}
           </div>
-          <textarea
-            id="user-input"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Type your question here..."
-            rows="3"
-            onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage(input)}
-          />
-          <button id="send-button" onClick={() => sendMessage(input)}>Send</button>
-          <button id="clear-button" onClick={clearChat}>Clear Chat</button>
+          <div className="chat-box">
+            <div id="chat-messages" ref={chatBoxRef}>
+              {messages.map((message, index) => (
+                <div key={index} className={`message ${message.sender.toLowerCase()}`}>
+                  <strong>{message.sender}:</strong> {message.text}
+                </div>
+              ))}
+              {isTyping && (
+                <div id="typing-indicator">
+                  <span></span><span></span><span></span>
+                </div>
+              )}
+            </div>
+            <div className="input-area">
+              <textarea
+                id="user-input"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Type your question here..."
+                rows="3"
+                onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage(input)}
+              />
+              <button id="send-button" onClick={() => sendMessage(input)}>Send</button>
+            </div>
+          </div>
         </div>
-      </div>
+      </main>
+      {showPopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <p>Just a moment while your Neighbor finishes this thought!</p>
+            <button onClick={() => setShowPopup(false)}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
