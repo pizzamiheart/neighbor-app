@@ -29,7 +29,7 @@ function HomePage() {
             <p>What if you could call one person who is always available and knows everything there is to know about your technology?</p>
           </div>
           <div className="statement">
-            <p>Well, that person doesn't exist but you can call your personal tech assistant Neighbor! An AI who's always around and ready to help!</p>
+            <p>Well, no person can do that but you can call your personal tech assistant, Neighbor! An AI who's always around and ready to help!</p>
           </div>
         </div>
         <div className="info-container">
