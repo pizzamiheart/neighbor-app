@@ -1,6 +1,6 @@
 import React from 'react';
 import { 
-  Typography, Button, Box, Grid, Card, CardContent, useMediaQuery, useTheme
+  Typography, Button, Box, Grid, Card, CardContent, useMediaQuery, useTheme, Toolbar
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Layout from './Layout';
@@ -17,7 +17,15 @@ function HomePage() {
 
   return (
     <Layout>
-      <Box sx={{ width: '100%', bgcolor: 'background.paper', px: { xs: 2, sm: 3 }, overflow: 'hidden' }}>
+      {/* Add Toolbar to offset the content below the header */}
+      <Toolbar />
+      <Box sx={{ 
+        width: '100%', 
+        bgcolor: 'background.paper', 
+        px: { xs: 2, sm: 3 }, 
+        minHeight: '100vh', 
+        pb: 4 
+      }}>
         <Typography variant="h3" align="center" gutterBottom sx={{ 
           mt: 4, 
           fontSize: { xs: '1.5rem', sm: '2rem', md: '3rem' },
@@ -80,7 +88,7 @@ function HomePage() {
             { icon: FamilyRestroomIcon, title: 'Free Up Your Time', desc: 'Get fast reliable help, and get back to your day' }
           ].map((item, index) => (
             <Grid item xs={12} sm={4} key={index}>
-              <Box sx={{ textAlign: 'center' }}>
+              <Box sx={{ textAlign: 'center', px: 2 }}>
                 <item.icon sx={{ fontSize: 40, color: 'primary.main' }} />
                 <Typography variant="h6">{item.title}</Typography>
                 <Typography variant="body2">{item.desc}</Typography>
@@ -97,7 +105,7 @@ function HomePage() {
           </Typography>
           <Grid container spacing={3} justifyContent="center">
             <Grid item xs={12}>
-              <Box sx={{ textAlign: 'center' }}>
+              <Box sx={{ textAlign: 'center', px: 2 }}>
                 <HelpOutlineIcon sx={{ fontSize: 60, color: 'primary.main' }} />
                 <Typography variant="h6">Bring Your Tech Question</Typography>
                 <Typography variant="body2">Printer won't print? Zoom link broken? Locked out of an account?</Typography>
@@ -105,7 +113,7 @@ function HomePage() {
             </Grid>
             {['Message', 'Call'].map((text, index) => (
               <Grid item xs={12} sm={6} key={index}>
-                <Box sx={{ textAlign: 'center' }}>
+                <Box sx={{ textAlign: 'center', px: 2 }}>
                   {index === 0 ? <ChatIcon sx={{ fontSize: 60, color: 'primary.main' }} /> : <PhoneIcon sx={{ fontSize: 60, color: 'primary.main' }} />}
                   <Typography variant="h6">{text}</Typography>
                   <Typography variant="body2">

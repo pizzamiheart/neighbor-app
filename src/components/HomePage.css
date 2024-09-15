@@ -10,12 +10,6 @@ body, html {
   background-color: #f0f2f5;
 }
 
-.home-page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
 /* Header styles */
 header {
   background-color: #4267B2;
@@ -94,7 +88,6 @@ h1 {
   flex-direction: column;
   width: 100%;
   gap: 15px;
-  overflow-y: auto;
 }
 
 .statement, .info {
@@ -144,7 +137,7 @@ h1 {
   }
 
   .statements-container, .info-container {
-    max-height: calc(100vh - 200px);
+    /* Removed max-height to allow content to expand */
   }
 
   .statement, .info {
