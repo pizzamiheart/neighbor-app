@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './MessagePage.css';
 import Layout from './Layout';
-import { Typography, Box, TextField, Button, Paper } from '@mui/material';
+import { Typography, Box, TextField, Button, Paper, AppBar, Toolbar } from '@mui/material';
 
 function MessagePage() {
   const [messages, setMessages] = useState([]);
@@ -86,10 +86,14 @@ function MessagePage() {
 
   return (
     <Layout title="Chat with Neighbor AI">
-      <Box sx={{ maxWidth: { xs: '100%', sm: '800px' }, mx: 'auto', p: 2 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Chat with Your Neighbor
-        </Typography>
+      <AppBar position="static" color="primary" sx={{ mb: 2 }}>
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Chat with Neighbor
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Box sx={{ maxWidth: { xs: '100%', sm: '800px' }, mx: 'auto', p: 2 }}> 
         <Paper elevation={3} sx={{ mb: 2, p: 2 }}>
           <Typography variant="h6" gutterBottom>
             Common Issues

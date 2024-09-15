@@ -14,8 +14,8 @@ function CallPage() {
     const cleaned = e.target.value.replace(/\D/g, '');
     // Limit to 10 digits
     const trimmed = cleaned.slice(0, 10);
-    // Format the number as (XXX) XXX-XXXX
-    const formatted = trimmed.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+    // Format the number as +1 (XXX) XXX-XXXX
+    const formatted = '+1 ' + trimmed.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
     setPhoneNumber(formatted);
   };
 
@@ -52,7 +52,14 @@ function CallPage() {
 
   return (
     <Layout title="Call Neighbor AI">
-      <Box sx={{ maxWidth: 600, mx: 'auto' }}>
+      <Box sx={{ 
+        maxWidth: 600, 
+        mx: 'auto', 
+        display: 'flex', 
+        flexDirection: 'column', 
+        justifyContent: 'center', 
+        height: 'calc(100vh - 64px)' // Adjust based on your AppBar height
+      }}>
         <Typography variant="h4" component="h1" gutterBottom>
           Ready to give your Neighbor a call?
         </Typography>
@@ -62,10 +69,16 @@ function CallPage() {
           variant="outlined"
           value={phoneNumber}
           onChange={handlePhoneChange}
-          placeholder="(123) 456-7890"
+          placeholder="+1 (123) 456-7890"
           margin="normal"
         />
-        <Button variant="contained" color="primary" onClick={initiateCall} fullWidth>
+        <Button 
+          variant="contained" 
+          color="primary" 
+          onClick={initiateCall} 
+          fullWidth
+          sx={{ py: 1.5, px: 3 }} // Adjust padding to reduce side area
+        >
           Start Call
         </Button>
         {callStatus && (
