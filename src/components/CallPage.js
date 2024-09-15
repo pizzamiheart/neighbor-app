@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './CallPage.css';
 import Layout from './Layout';
-import { Typography, Box, TextField, Button, Modal } from '@mui/material';
+import { Typography, Box, TextField, Button, Modal, AppBar, Toolbar } from '@mui/material';
 
 function CallPage() {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -10,17 +10,13 @@ function CallPage() {
   const [openModal, setOpenModal] = useState(false);
 
   const handlePhoneChange = (e) => {
-    // Remove any non-digit characters from the input
     const cleaned = e.target.value.replace(/\D/g, '');
-    // Limit to 10 digits
     const trimmed = cleaned.slice(0, 10);
-    // Format the number as +1 (XXX) XXX-XXXX
-    const formatted = '+1 ' + trimmed.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+    const formatted = trimmed.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
     setPhoneNumber(formatted);
   };
 
   const initiateCall = async () => {
-    // Remove formatting and add +1 prefix
     const fullNumber = '+1' + phoneNumber.replace(/\D/g, '');
 
     if (fullNumber.length !== 12) {
@@ -28,7 +24,7 @@ function CallPage() {
       return;
     }
 
-    setOpenModal(true); // Open the modal with instructions
+    setOpenModal(true);
     setCallStatus('Initiating call...');
 
     try {
@@ -51,33 +47,50 @@ function CallPage() {
   const handleCloseModal = () => setOpenModal(false);
 
   return (
-    <Layout title="Call Neighbor AI">
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Neighbor
+          </Typography>
+          <Button color="inherit" component={Link} to="/">Home</Button>
+          <Button color="inherit" component={Link} to="/message">Chat</Button>
+        </Toolbar>
+      </AppBar>
       <Box sx={{ 
         maxWidth: 600, 
         mx: 'auto', 
         display: 'flex', 
         flexDirection: 'column', 
         justifyContent: 'center', 
-        height: 'calc(100vh - 64px)' // Adjust based on your AppBar height
+        height: 'calc(100vh - 64px)', 
+        p: 2
       }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Ready to give your Neighbor a call?
+        <Typography variant="h4" component="h1" gutterBottom align="center">
+          Ready to give your<br />Neighbor a call?
         </Typography>
-        <TextField
-          fullWidth
-          label="Phone Number"
-          variant="outlined"
-          value={phoneNumber}
-          onChange={handlePhoneChange}
-          placeholder="+1 (123) 456-7890"
-          margin="normal"
-        />
+        <Typography variant="body1" paragraph>
+          • You will receive a call in about 10 seconds.<br />
+          • The call will come from an unknown number and a random city.<br />
+          • Please ensure you allow calls from unknown numbers.<br />
+          • If you have Do Not Disturb enabled, please turn it off.
+        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+          <Typography variant="h6" sx={{ mr: 1 }}>+1</Typography>
+          <TextField
+            fullWidth
+            label="Phone Number"
+            variant="outlined"
+            value={phoneNumber}
+            onChange={handlePhoneChange}
+            placeholder="(123) 456-7890"
+          />
+        </Box>
         <Button 
           variant="contained" 
           color="primary" 
           onClick={initiateCall} 
-          fullWidth
-          sx={{ py: 1.5, px: 3 }} // Adjust padding to reduce side area
+          sx={{ py: 1.5, px: 3, alignSelf: 'center', width: 'auto' }}
         >
           Start Call
         </Button>
@@ -86,9 +99,7 @@ function CallPage() {
             {callStatus}
           </Typography>
         )}
-        {/* Your existing call functionality components */}
       </Box>
-
       <Modal
         open={openModal}
         onClose={handleCloseModal}
@@ -107,23 +118,14 @@ function CallPage() {
           p: 4,
         }}>
           <Typography id="call-instructions-modal" variant="h6" component="h2">
-            Important Call Information
-          </Typography>
-          <Typography id="call-instructions-description" sx={{ mt: 2 }}>
-            • You will receive a call in about 10 seconds.
-            <br />
-            • The call will come from an unknown number and a random city.
-            <br />
-            • Please ensure you allow calls from unknown numbers.
-            <br />
-            • If you have Do Not Disturb enabled, please turn it off.
+            Grab your phone! Neighbor is giving you a call!
           </Typography>
           <Button onClick={handleCloseModal} sx={{ mt: 2 }}>
-            I understand
+            Close
           </Button>
         </Box>
       </Modal>
-    </Layout>
+    </Box>
   );
 }
 

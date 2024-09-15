@@ -93,83 +93,94 @@ function MessagePage() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Box sx={{ maxWidth: { xs: '100%', sm: '800px' }, mx: 'auto', p: 2 }}> 
-        <Paper elevation={3} sx={{ mb: 2, p: 2 }}>
-          <Typography variant="h6" gutterBottom>
-            Common Issues
-          </Typography>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-            {commonIssues.map((issue, index) => (
-              <Button 
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              Neighbor
+            </Typography>
+            <Button color="inherit" component={Link} to="/">Home</Button>
+            <Button color="inherit" component={Link} to="/call">Call</Button>
+          </Toolbar>
+        </AppBar>
+        <Box sx={{ maxWidth: { xs: '100%', sm: '800px' }, mx: 'auto', p: 2 }}>
+          <Paper elevation={3} sx={{ mb: 2, p: 2 }}>
+            <Typography variant="h6" gutterBottom>
+              Common Issues
+            </Typography>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+              {commonIssues.map((issue, index) => (
+                <Button 
+                  key={index} 
+                  variant="outlined" 
+                  size="small"
+                  onClick={() => handleCommonIssueClick(issue.prompt)}
+                >
+                  {issue.label}
+                </Button>
+              ))}
+            </Box>
+          </Paper>
+          <Paper 
+            elevation={3} 
+            sx={{ 
+              height: { xs: '50vh', sm: '60vh' }, 
+              overflowY: 'auto',
+              p: 2,
+              mb: 2
+            }}
+            ref={chatBoxRef}
+          >
+            {messages.map((message, index) => (
+              <Box 
                 key={index} 
-                variant="outlined" 
-                size="small"
-                onClick={() => handleCommonIssueClick(issue.prompt)}
-              >
-                {issue.label}
-              </Button>
-            ))}
-          </Box>
-        </Paper>
-        <Paper 
-          elevation={3} 
-          sx={{ 
-            height: { xs: '50vh', sm: '60vh' }, 
-            overflowY: 'auto',
-            p: 2,
-            mb: 2
-          }}
-          ref={chatBoxRef}
-        >
-          {messages.map((message, index) => (
-            <Box 
-              key={index} 
-              sx={{ 
-                mb: 1, 
-                textAlign: message.sender.toLowerCase() === 'you' ? 'right' : 'left'
-              }}
-            >
-              <Typography 
-                variant="body2" 
                 sx={{ 
-                  display: 'inline-block',
-                  bgcolor: message.sender.toLowerCase() === 'you' ? 'primary.light' : 'grey.200',
-                  color: message.sender.toLowerCase() === 'you' ? 'white' : 'text.primary',
-                  p: 1,
-                  borderRadius: 1
+                  mb: 1, 
+                  textAlign: message.sender.toLowerCase() === 'you' ? 'right' : 'left'
                 }}
               >
-                <strong>{message.sender}:</strong> {message.text}
-              </Typography>
-            </Box>
-          ))}
-          {isTyping && (
-            <Box sx={{ textAlign: 'left' }}>
-              <Typography variant="body2" sx={{ fontStyle: 'italic' }}>
-                Neighbor is typing...
-              </Typography>
-            </Box>
-          )}
-        </Paper>
-        <Box sx={{ display: 'flex', gap: 1 }}>
-          <TextField
-            fullWidth
-            multiline
-            rows={3}
-            variant="outlined"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Type your question here..."
-            onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage(input)}
-          />
-          <Button 
-            variant="contained" 
-            color="primary" 
-            onClick={() => sendMessage(input)}
-            sx={{ alignSelf: 'flex-end' }}
-          >
-            Send
-          </Button>
+                <Typography 
+                  variant="body2" 
+                  sx={{ 
+                    display: 'inline-block',
+                    bgcolor: message.sender.toLowerCase() === 'you' ? 'primary.light' : 'grey.200',
+                    color: message.sender.toLowerCase() === 'you' ? 'white' : 'text.primary',
+                    p: 1,
+                    borderRadius: 1
+                  }}
+                >
+                  <strong>{message.sender}:</strong> {message.text}
+                </Typography>
+              </Box>
+            ))}
+            {isTyping && (
+              <Box sx={{ textAlign: 'left' }}>
+                <Typography variant="body2" sx={{ fontStyle: 'italic' }}>
+                  Neighbor is typing...
+                </Typography>
+              </Box>
+            )}
+          </Paper>
+          <Box sx={{ display: 'flex', gap: 1 }}>
+            <TextField
+              fullWidth
+              multiline
+              rows={3}
+              variant="outlined"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Type your question here..."
+              onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage(input)}
+            />
+            <Button 
+              variant="contained" 
+              color="primary" 
+              onClick={() => sendMessage(input)}
+              sx={{ alignSelf: 'flex-end' }}
+            >
+              Send
+            </Button>
+          </Box>
         </Box>
       </Box>
       {showPopup && (
