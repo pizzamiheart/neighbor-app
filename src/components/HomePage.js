@@ -110,7 +110,7 @@ function HomePage() {
             <Box sx={{ textAlign: 'center' }}>
               <FamilyRestroomIcon sx={{ fontSize: 40, color: 'primary.main' }} />
               <Typography variant="h6">Free Up Your Time</Typography>
-              <Typography variant="body2">When your parent needs help printing, they can call their Neighbor</Typography>
+              <Typography variant="body2">Get fast reliable help, and get back to your day </Typography>
             </Box>
           </Grid>
         </Grid>
@@ -124,18 +124,21 @@ function HomePage() {
               <Box sx={{ textAlign: 'center' }}>
                 <HelpOutlineIcon sx={{ fontSize: 60, color: 'primary.main' }} />
                 <Typography variant="h6">1. Bring Your Tech Question</Typography>
+                <Typography variant="body2">Printer won't print? Zoom link broken? Locked out of an account?</Typography>
               </Box>
             </Grid>
             <Grid item xs={12} sm={4}>
               <Box sx={{ textAlign: 'center' }}>
                 <ChatIcon sx={{ fontSize: 60, color: 'primary.main' }} />
                 <Typography variant="h6">2. Message</Typography>
+                <Typography variant="body2">Chat with Neighbor to find the solution</Typography>
               </Box>
             </Grid>
             <Grid item xs={12} sm={4}>
               <Box sx={{ textAlign: 'center' }}>
                 <PhoneIcon sx={{ fontSize: 60, color: 'primary.main' }} />
                 <Typography variant="h6">3. Call</Typography>
+                <Typography variant="body2">Call Neighbor and get instant help from your AI assistant</Typography>
               </Box>
             </Grid>
           </Grid>
