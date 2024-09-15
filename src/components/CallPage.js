@@ -48,8 +48,8 @@ function CallPage() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
+        <AppBar position="static">
+          <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Neighbor
           </Typography>

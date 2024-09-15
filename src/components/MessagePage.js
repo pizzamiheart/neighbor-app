@@ -86,18 +86,11 @@ function MessagePage() {
 
   return (
     <Layout title="Chat with Neighbor AI">
-      <AppBar position="static" color="primary" sx={{ mb: 2 }}>
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Chat with Neighbor
-          </Typography>
-        </Toolbar>
-      </AppBar>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Neighbor
+              Chat with Neighbor
             </Typography>
             <Button color="inherit" component={Link} to="/">Home</Button>
             <Button color="inherit" component={Link} to="/call">Call</Button>
