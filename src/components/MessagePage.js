@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './MessagePage.css';
+import Layout from './Layout';
+import { Typography, Box, TextField, Button, Paper } from '@mui/material';
 
 function MessagePage() {
   const [messages, setMessages] = useState([]);
@@ -83,62 +85,110 @@ function MessagePage() {
   };
 
   return (
-    <div className="message-page">
-      <header>
-        <nav>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/message">Chat with AI</Link></li>
-            <li><Link to="/call">Speak Live</Link></li>
-          </ul>
-        </nav>
-      </header>
-      <main>
-        <h1>Neighbor</h1>
-        <h2>Your Friendly Tech Assistant</h2>
-        <div className="chat-container">
-          <div className="common-issues">
-            <h3>Common Issues</h3>
+    <Layout title="Chat with Neighbor AI">
+      <Box sx={{ maxWidth: { xs: '100%', sm: '800px' }, mx: 'auto', p: 2 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Chat with Your Neighbor
+        </Typography>
+        <Paper elevation={3} sx={{ mb: 2, p: 2 }}>
+          <Typography variant="h6" gutterBottom>
+            Common Issues
+          </Typography>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
             {commonIssues.map((issue, index) => (
-              <button key={index} onClick={() => handleCommonIssueClick(issue.prompt)}>{issue.label}</button>
+              <Button 
+                key={index} 
+                variant="outlined" 
+                size="small"
+                onClick={() => handleCommonIssueClick(issue.prompt)}
+              >
+                {issue.label}
+              </Button>
             ))}
-          </div>
-          <div className="chat-box">
-            <div id="chat-messages" ref={chatBoxRef}>
-              {messages.map((message, index) => (
-                <div key={index} className={`message ${message.sender.toLowerCase()}`}>
-                  <strong>{message.sender}:</strong> {message.text}
-                </div>
-              ))}
-              {isTyping && (
-                <div id="typing-indicator">
-                  <span></span><span></span><span></span>
-                </div>
-              )}
-            </div>
-            <div className="input-area">
-              <textarea
-                id="user-input"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Type your question here..."
-                rows="3"
-                onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage(input)}
-              />
-              <button id="send-button" onClick={() => sendMessage(input)}>Send</button>
-            </div>
-          </div>
-        </div>
-      </main>
+          </Box>
+        </Paper>
+        <Paper 
+          elevation={3} 
+          sx={{ 
+            height: { xs: '50vh', sm: '60vh' }, 
+            overflowY: 'auto',
+            p: 2,
+            mb: 2
+          }}
+          ref={chatBoxRef}
+        >
+          {messages.map((message, index) => (
+            <Box 
+              key={index} 
+              sx={{ 
+                mb: 1, 
+                textAlign: message.sender.toLowerCase() === 'you' ? 'right' : 'left'
+              }}
+            >
+              <Typography 
+                variant="body2" 
+                sx={{ 
+                  display: 'inline-block',
+                  bgcolor: message.sender.toLowerCase() === 'you' ? 'primary.light' : 'grey.200',
+                  color: message.sender.toLowerCase() === 'you' ? 'white' : 'text.primary',
+                  p: 1,
+                  borderRadius: 1
+                }}
+              >
+                <strong>{message.sender}:</strong> {message.text}
+              </Typography>
+            </Box>
+          ))}
+          {isTyping && (
+            <Box sx={{ textAlign: 'left' }}>
+              <Typography variant="body2" sx={{ fontStyle: 'italic' }}>
+                Neighbor is typing...
+              </Typography>
+            </Box>
+          )}
+        </Paper>
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          <TextField
+            fullWidth
+            multiline
+            rows={3}
+            variant="outlined"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Type your question here..."
+            onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage(input)}
+          />
+          <Button 
+            variant="contained" 
+            color="primary" 
+            onClick={() => sendMessage(input)}
+            sx={{ alignSelf: 'flex-end' }}
+          >
+            Send
+          </Button>
+        </Box>
+      </Box>
       {showPopup && (
-        <div className="popup">
-          <div className="popup-content">
-            <p>Just a moment while your Neighbor finishes this thought!</p>
-            <button onClick={() => setShowPopup(false)}>Close</button>
-          </div>
-        </div>
+        <Box 
+          sx={{ 
+            position: 'fixed', 
+            top: 0, 
+            left: 0, 
+            right: 0, 
+            bottom: 0, 
+            bgcolor: 'rgba(0,0,0,0.5)', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center' 
+          }}
+        >
+          <Paper sx={{ p: 2, maxWidth: '80%' }}>
+            <Typography>Just a moment while your Neighbor finishes this thought!</Typography>
+            <Button onClick={() => setShowPopup(false)} sx={{ mt: 1 }}>Close</Button>
+          </Paper>
+        </Box>
       )}
-    </div>
+    </Layout>
   );
 }
 

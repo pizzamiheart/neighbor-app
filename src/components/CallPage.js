@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './CallPage.css';
+import Layout from './Layout';
+import { Typography, Box, TextField, Button, Modal } from '@mui/material';
 
 function CallPage() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [callStatus, setCallStatus] = useState('');
+  const [openModal, setOpenModal] = useState(false);
 
   const handlePhoneChange = (e) => {
     // Remove any non-digit characters from the input
@@ -25,7 +28,8 @@ function CallPage() {
       return;
     }
 
-    setCallStatus('Grab your phone! Neighbor is giving you a call');
+    setOpenModal(true); // Open the modal with instructions
+    setCallStatus('Initiating call...');
 
     try {
       const response = await fetch('/.netlify/functions/call', {
@@ -44,36 +48,69 @@ function CallPage() {
     }
   };
 
+  const handleCloseModal = () => setOpenModal(false);
+
   return (
-    <div className="call-page">
-      <header>
-        <nav>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/message">Chat with AI</Link></li>
-            <li><Link to="/call">Speak Live</Link></li>
-          </ul>
-        </nav>
-      </header>
-      <main>
-        <h1>Ready to Call Your Neighbor?</h1>
-        <h3>Whatever your technical issues or questions are, Neighbor can help you troubleshoot!</h3>
-        <div className="input-container">
-          <div className="phone-input">
-            <span className="prefix">+1</span>
-            <input
-              type="tel"
-              value={phoneNumber}
-              onChange={handlePhoneChange}
-              placeholder="(123) 456-7890"
-            />
-          </div>
-          <button onClick={initiateCall}>Start Call</button>
-        </div>
-        <p>Neighbor is an artificial intelligence designed to be always available and helpful. It's most helpful when you provide more detail of what you're experiencing.</p>
-        <div className="call-status">{callStatus}</div>
-      </main>
-    </div>
+    <Layout title="Call Neighbor AI">
+      <Box sx={{ maxWidth: 600, mx: 'auto' }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Ready to give your Neighbor a call?
+        </Typography>
+        <TextField
+          fullWidth
+          label="Phone Number"
+          variant="outlined"
+          value={phoneNumber}
+          onChange={handlePhoneChange}
+          placeholder="(123) 456-7890"
+          margin="normal"
+        />
+        <Button variant="contained" color="primary" onClick={initiateCall} fullWidth>
+          Start Call
+        </Button>
+        {callStatus && (
+          <Typography variant="body2" color="error" sx={{ mt: 2 }}>
+            {callStatus}
+          </Typography>
+        )}
+        {/* Your existing call functionality components */}
+      </Box>
+
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        aria-labelledby="call-instructions-modal"
+        aria-describedby="call-instructions-description"
+      >
+        <Box sx={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 400,
+          bgcolor: 'background.paper',
+          border: '2px solid #000',
+          boxShadow: 24,
+          p: 4,
+        }}>
+          <Typography id="call-instructions-modal" variant="h6" component="h2">
+            Important Call Information
+          </Typography>
+          <Typography id="call-instructions-description" sx={{ mt: 2 }}>
+            • You will receive a call in about 10 seconds.
+            <br />
+            • The call will come from an unknown number and a random city.
+            <br />
+            • Please ensure you allow calls from unknown numbers.
+            <br />
+            • If you have Do Not Disturb enabled, please turn it off.
+          </Typography>
+          <Button onClick={handleCloseModal} sx={{ mt: 2 }}>
+            I understand
+          </Button>
+        </Box>
+      </Modal>
+    </Layout>
   );
 }
 
