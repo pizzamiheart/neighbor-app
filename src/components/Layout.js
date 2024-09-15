@@ -31,9 +31,6 @@ function Layout({ children, title }) {
       <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: 'background.default' }}>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="h6" sx={{ flexGrow: 1 }}>
-              Neighbor AI
-            </Typography>
             <Button color="inherit" component={Link} to="/">Home</Button>
             <Button color="inherit" component={Link} to="/message">Chat</Button>
             <Button color="inherit" component={Link} to="/call">Call</Button>
