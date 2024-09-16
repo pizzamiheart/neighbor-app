@@ -11,15 +11,33 @@ function HomePage() {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <Box sx={{ width: '100%', p: 2, display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}>
+    <Box 
+      sx={{ 
+        width: '100%', 
+        maxWidth: isMobile ? '100%' : '800px', // Adjust max width for desktop
+        mx: 'auto', // Center the content horizontally
+        p: 2, 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'stretch' 
+      }}
+    >
       <Typography variant={isMobile ? "h4" : "h3"} align="center" gutterBottom sx={{ mt: 2, mb: 1 }}>
         Neighbor AI
       </Typography>
       <Typography variant="subtitle1" align="center" paragraph sx={{ mb: 2, fontWeight: 'bold' }}>
-        The always-available tech assistant for older users
+        The always-available tech assistant specifically for older adults
       </Typography>
       
-      <Stack direction="row" spacing={2} sx={{ mb: 3, justifyContent: 'center' }}>
+      <Stack 
+        direction={isMobile ? "column" : "row"} // Stack vertically on mobile
+        spacing={2} 
+        sx={{ 
+          mb: 3, 
+          justifyContent: 'center',
+          alignItems: 'center' // Center buttons on mobile
+        }}
+      >
         <Button 
           variant="contained" 
           color="primary" 
@@ -27,7 +45,10 @@ function HomePage() {
           to="/message" 
           startIcon={<ChatIcon />}
           size="large"
-          sx={{ width: '45%', maxWidth: '200px' }}
+          sx={{ 
+            width: isMobile ? '80%' : '45%', // Adjust width for mobile
+            maxWidth: '250px' // Slightly larger button on desktop
+          }}
         >
           Chat with Neighbor
         </Button>
@@ -38,11 +59,24 @@ function HomePage() {
           to="/call" 
           startIcon={<PhoneIcon />}
           size="large"
-          sx={{ width: '45%', maxWidth: '200px' }}
+          sx={{ 
+            width: isMobile ? '80%' : '45%', // Adjust width for mobile
+            maxWidth: '250px' // Slightly larger button on desktop
+          }}
         >
           Call Neighbor
         </Button>
       </Stack>
+
+      {/* New tagline added here */}
+      <Typography 
+        variant="body1" 
+        align="center" 
+        paragraph 
+        sx={{ mb: 3, fontStyle: 'italic', color: 'text.secondary' }}
+      >
+        Designed with simplicity in mind, for those who want quick and friendly tech help at any time.
+      </Typography>
 
       <Typography variant="h5" align="center" gutterBottom sx={{ mt: 3, mb: 1 }}>
         The Problem with Tech Support
@@ -61,7 +95,7 @@ function HomePage() {
       <Paper elevation={3} sx={{ p: 2 }}>
         <Stack spacing={1}>
           <Typography variant="body1" align="center">One number to call, one place to chat</Typography>
-          <Typography variant="body1" align="center">Infinite business hours, always-available to help</Typography>
+          <Typography variant="body1" align="center">Infinite business hours, always available to help</Typography>
           <Typography variant="body1" align="center">Quick answers from our friendly AI</Typography>
         </Stack>
       </Paper>
