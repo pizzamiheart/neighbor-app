@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import HomePage from './components/HomePage';
 import MessagePage from './components/MessagePage';
@@ -9,11 +9,11 @@ function App() {
   return (
     <Router>
       <Layout>
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/message" component={MessagePage} />
-          <Route path="/call" component={CallPage} />
-        </Switch>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/message" element={<MessagePage />} />
+          <Route path="/call" element={<CallPage />} />
+        </Routes>
       </Layout>
     </Router>
   );
