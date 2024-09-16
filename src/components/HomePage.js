@@ -11,15 +11,15 @@ function HomePage() {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <Box sx={{ width: '100%', p: 2 }}>
-      <Typography variant={isMobile ? "h4" : "h3"} align="center" gutterBottom sx={{ mt: 4, mb: 2 }}>
+    <Box sx={{ width: '100%', p: 2, display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}>
+      <Typography variant={isMobile ? "h4" : "h3"} align="center" gutterBottom sx={{ mt: 2, mb: 1 }}>
         Neighbor AI
       </Typography>
-      <Typography variant="subtitle1" align="center" paragraph sx={{ mb: 4, fontWeight: 'bold' }}>
-        The always-available tech assistant for older tech users
+      <Typography variant="subtitle1" align="center" paragraph sx={{ mb: 2, fontWeight: 'bold' }}>
+        The always-available tech assistant for older users
       </Typography>
       
-      <Stack direction="row" spacing={2} sx={{ mb: 4, justifyContent: 'center' }}>
+      <Stack direction="row" spacing={2} sx={{ mb: 3, justifyContent: 'center' }}>
         <Button 
           variant="contained" 
           color="primary" 
@@ -27,7 +27,7 @@ function HomePage() {
           to="/message" 
           startIcon={<ChatIcon />}
           size="large"
-          sx={{ width: '40%' }}
+          sx={{ width: '45%', maxWidth: '200px' }}
         >
           Chat with Neighbor
         </Button>
@@ -38,31 +38,31 @@ function HomePage() {
           to="/call" 
           startIcon={<PhoneIcon />}
           size="large"
-          sx={{ width: '40%' }}
+          sx={{ width: '45%', maxWidth: '200px' }}
         >
           Call Neighbor
         </Button>
       </Stack>
 
-      <Typography variant="h5" align="center" gutterBottom sx={{ mt: 6, mb: 2 }}>
+      <Typography variant="h5" align="center" gutterBottom sx={{ mt: 3, mb: 1 }}>
         The Problem with Tech Support
       </Typography>
-      <Paper elevation={3} sx={{ p: 2, mb: 4 }}>
+      <Paper elevation={3} sx={{ p: 2, mb: 3 }}>
         <Stack spacing={1}>
-          <Typography variant="body1">• Too many tech support numbers to keep up with</Typography>
-          <Typography variant="body1">• Business hours are limited</Typography>
-          <Typography variant="body1">• Family members are helpful, but getting quick answers is hard</Typography>
+          <Typography variant="body1" align="center">Too many tech support numbers to keep up with</Typography>
+          <Typography variant="body1" align="center">Business hours are limited</Typography>
+          <Typography variant="body1" align="center">Family members are helpful, but getting quick answers is hard</Typography>
         </Stack>
       </Paper>
 
-      <Typography variant="h5" align="center" gutterBottom sx={{ mt: 6, mb: 2 }}>
+      <Typography variant="h5" align="center" gutterBottom sx={{ mt: 3, mb: 1 }}>
         Meet Neighbor
       </Typography>
       <Paper elevation={3} sx={{ p: 2 }}>
         <Stack spacing={1}>
-          <Typography variant="body1">• One number to call, one place to chat</Typography>
-          <Typography variant="body1">• Infinite business hours, always-available to help</Typography>
-          <Typography variant="body1">• Quick answers from our friendly AI</Typography>
+          <Typography variant="body1" align="center">One number to call, one place to chat</Typography>
+          <Typography variant="body1" align="center">Infinite business hours, always-available to help</Typography>
+          <Typography variant="body1" align="center">Quick answers from our friendly AI</Typography>
         </Stack>
       </Paper>
     </Box>
