@@ -1,6 +1,7 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
+import { AppBar, Toolbar, Typography, IconButton, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
+import HomeIcon from '@mui/icons-material/Home';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 // Define the theme here
@@ -15,29 +16,36 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-    h2: {
-      fontWeight: 700,
-      fontSize: '2.5rem',
+    h4: {
+      fontSize: '1.5rem',
+      fontWeight: 600,
     },
     h5: {
+      fontSize: '1.25rem',
+      fontWeight: 500,
+    },
+    h6: {
+      fontSize: '1rem',
       fontWeight: 500,
     },
   },
 });
 
-function Layout({ children, title }) {
+function Layout({ children }) {
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: 'background.default' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <AppBar position="static">
           <Toolbar>
-            <Button color="inherit" component={Link} to="/">Home</Button>
-            <Button color="inherit" component={Link} to="/message">Chat</Button>
-            <Button color="inherit" component={Link} to="/call">Call</Button>
+            <IconButton color="inherit" component={Link} to="/" edge="start">
+              <HomeIcon />
+            </IconButton>
+            <Typography variant="h6" sx={{ flexGrow: 1 }}>
+              Neighbor
+            </Typography>
           </Toolbar>
         </AppBar>
-        <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', p: 3 }}>
-          {title && <Typography variant="h4" component="h1" gutterBottom>{title}</Typography>}
+        <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
           {children}
         </Box>
       </Box>
