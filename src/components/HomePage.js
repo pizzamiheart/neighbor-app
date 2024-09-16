@@ -17,18 +17,17 @@ function HomePage() {
 
   return (
     <Layout>
-      <Box sx={{ width: '100%', bgcolor: 'background.paper', px: { xs: 2, sm: 3 }, overflow: 'hidden' }}>
-        <Typography variant="h3" align="center" gutterBottom sx={{ 
-          mt: 4, 
-          fontSize: { xs: '1.5rem', sm: '2rem', md: '3rem' },
-          wordWrap: 'break-word'
-        }}>
+      <Box sx={{ width: '100%', bgcolor: 'background.paper', px: 2 }}>
+        <Typography variant="h3" align="center" gutterBottom sx={{ mt: 4, fontSize: { xs: '2rem', sm: '3rem' } }}>
+          Tech Support Made Easy, All in One Place
+        </Typography>
+        <Typography variant="h5" align="center" paragraph sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem' } }}>
           Neighbor AI: Your always-available tech assistant for older tech users
         </Typography>
         
-        <Grid container spacing={2} justifyContent="center" sx={{ mb: 4 }}>
+        <Grid container spacing={4} justifyContent="center" sx={{ mb: 4 }}>
           {['For Older Tech Users', 'For Family Members'].map((title, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
+            <Grid item xs={12} sm={6} key={index}>
               <Card raised sx={{ height: '100%', transition: '0.3s', '&:hover': { transform: 'scale(1.03)' } }}>
                 <CardContent>
                   <Typography variant="h6" gutterBottom>{title}</Typography>
@@ -68,12 +67,10 @@ function HomePage() {
           ))}
         </Grid>
         
-        <Typography variant="h4" align="center" gutterBottom sx={{ 
-          fontSize: { xs: '1.5rem', sm: '1.8rem', md: '2.125rem' } 
-        }}>
+        <Typography variant="h4" align="center" gutterBottom>
           Why Choose Neighbor?
         </Typography>
-        <Grid container spacing={2} justifyContent="center">
+        <Grid container spacing={4} justifyContent="center">
           {[
             { icon: AccessTimeFilledIcon, title: 'Always Available', desc: 'No wait times, infinite business hours' },
             { icon: SupportAgentIcon, title: 'Patient Guidance', desc: 'Clear, step-by-step instructions' },
@@ -81,7 +78,7 @@ function HomePage() {
           ].map((item, index) => (
             <Grid item xs={12} sm={4} key={index}>
               <Box sx={{ textAlign: 'center' }}>
-                <item.icon sx={{ fontSize: 40, color: 'primary.main' }} />
+                <item.icon sx={{ fontSize: 60, color: 'primary.main' }} />
                 <Typography variant="h6">{item.title}</Typography>
                 <Typography variant="body2">{item.desc}</Typography>
               </Box>
@@ -90,9 +87,7 @@ function HomePage() {
         </Grid>
         
         <Box sx={{ my: 4 }}>
-          <Typography variant="h4" align="center" gutterBottom sx={{ 
-            fontSize: { xs: '1.5rem', sm: '1.8rem', md: '2.125rem' } 
-          }}>
+          <Typography variant="h4" align="center" gutterBottom>
             How Neighbor Works
           </Typography>
           <Grid container spacing={3} justifyContent="center">
