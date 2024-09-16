@@ -1,6 +1,6 @@
 import React from 'react';
 import { 
-  Typography, Button, Box, Stack, useTheme, useMediaQuery
+  Typography, Button, Box, Stack, useTheme, useMediaQuery, Paper
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import ChatIcon from '@mui/icons-material/Chat';
@@ -11,23 +11,23 @@ function HomePage() {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <Box sx={{ width: '100%', maxWidth: '600px', mx: 'auto', p: 2 }}>
+    <Box sx={{ width: '100%', p: 2 }}>
       <Typography variant={isMobile ? "h4" : "h3"} align="center" gutterBottom sx={{ mt: 4, mb: 2 }}>
         Neighbor AI
       </Typography>
-      <Typography variant="body1" align="center" paragraph sx={{ mb: 4 }}>
-        the always-available tech assistant for older tech users
+      <Typography variant="subtitle1" align="center" paragraph sx={{ mb: 4, fontWeight: 'bold' }}>
+        The always-available tech assistant for older tech users
       </Typography>
       
-      <Stack spacing={2} sx={{ mb: 4 }}>
+      <Stack direction="row" spacing={2} sx={{ mb: 4, justifyContent: 'center' }}>
         <Button 
           variant="contained" 
           color="primary" 
           component={Link} 
           to="/message" 
           startIcon={<ChatIcon />}
-          fullWidth
           size="large"
+          sx={{ width: '40%' }}
         >
           Chat with Neighbor
         </Button>
@@ -37,39 +37,34 @@ function HomePage() {
           component={Link} 
           to="/call" 
           startIcon={<PhoneIcon />}
-          fullWidth
           size="large"
+          sx={{ width: '40%' }}
         >
           Call Neighbor
         </Button>
       </Stack>
 
       <Typography variant="h5" align="center" gutterBottom sx={{ mt: 6, mb: 2 }}>
-        Why Choose Neighbor?
+        The Problem with Tech Support
       </Typography>
-      <Stack spacing={2}>
-        <Box>
-          <Typography variant="h6">Always Available</Typography>
-          <Typography variant="body2">24/7 tech support, no wait times</Typography>
-        </Box>
-        <Box>
-          <Typography variant="h6">Patient Guidance</Typography>
-          <Typography variant="body2">Clear, step-by-step instructions</Typography>
-        </Box>
-        <Box>
-          <Typography variant="h6">Free Up Your Time</Typography>
-          <Typography variant="body2">Help for your loved ones when they need it</Typography>
-        </Box>
-      </Stack>
+      <Paper elevation={3} sx={{ p: 2, mb: 4 }}>
+        <Stack spacing={1}>
+          <Typography variant="body1">• Too many tech support numbers to keep up with</Typography>
+          <Typography variant="body1">• Business hours are limited</Typography>
+          <Typography variant="body1">• Family members are helpful, but getting quick answers is hard</Typography>
+        </Stack>
+      </Paper>
 
       <Typography variant="h5" align="center" gutterBottom sx={{ mt: 6, mb: 2 }}>
-        How It Works
+        Meet Neighbor
       </Typography>
-      <Stack spacing={2}>
-        <Typography variant="body1">1. Bring your tech question</Typography>
-        <Typography variant="body1">2. Chat or call Neighbor</Typography>
-        <Typography variant="body1">3. Get clear, patient guidance</Typography>
-      </Stack>
+      <Paper elevation={3} sx={{ p: 2 }}>
+        <Stack spacing={1}>
+          <Typography variant="body1">• One number to call, one place to chat</Typography>
+          <Typography variant="body1">• Infinite business hours, always-available to help</Typography>
+          <Typography variant="body1">• Quick answers from our friendly AI</Typography>
+        </Stack>
+      </Paper>
     </Box>
   );
 }
