@@ -136,10 +136,6 @@ h1 {
     margin-bottom: 10px;
   }
 
-  .statements-container, .info-container {
-    /* Removed max-height to allow content to expand */
-  }
-
   .statement, .info {
     font-size: 14px;
     padding: 10px;
