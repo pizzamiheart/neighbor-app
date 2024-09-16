@@ -2,9 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './MessagePage.css';
 import Layout from './Layout';
-import { Typography, Box, TextField, Button, Paper, AppBar, Toolbar } from '@mui/material';
+import { Typography, Box, TextField, Button, Paper, AppBar, Toolbar, useMediaQuery, useTheme } from '@mui/material';
 
 function MessagePage() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -85,8 +87,8 @@ function MessagePage() {
   };
 
   return (
-    <Layout title="Chat with Neighbor AI">
-      <Box sx={{ flexGrow: 1 }}>
+    <Layout>
+      <Box sx={{ flexGrow: 1, width: '100%' }}>
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -96,7 +98,7 @@ function MessagePage() {
             <Button color="inherit" component={Link} to="/call">Call</Button>
           </Toolbar>
         </AppBar>
-        <Box sx={{ maxWidth: { xs: '100%', sm: '800px' }, mx: 'auto', p: 2 }}>
+        <Box sx={{ width: '100%', mx: 'auto', p: 2 }}>
           <Paper elevation={3} sx={{ mb: 2, p: 2 }}>
             <Typography variant="h6" gutterBottom>
               Common Issues
@@ -106,8 +108,13 @@ function MessagePage() {
                 <Button 
                   key={index} 
                   variant="outlined" 
-                  size="small"
+                  size={isMobile ? "small" : "medium"}
                   onClick={() => handleCommonIssueClick(issue.prompt)}
+                  sx={{ 
+                    fontSize: isMobile ? '0.7rem' : '0.8rem',
+                    padding: isMobile ? '4px 8px' : '6px 16px',
+                    flexBasis: isMobile ? 'calc(50% - 4px)' : 'auto'
+                  }}
                 >
                   {issue.label}
                 </Button>
@@ -117,7 +124,7 @@ function MessagePage() {
           <Paper 
             elevation={3} 
             sx={{ 
-              height: { xs: '50vh', sm: '60vh' }, 
+              height: { xs: 'calc(100vh - 300px)', sm: '60vh' }, 
               overflowY: 'auto',
               p: 2,
               mb: 2
@@ -158,7 +165,7 @@ function MessagePage() {
             <TextField
               fullWidth
               multiline
-              rows={3}
+              rows={isMobile ? 2 : 3}
               variant="outlined"
               value={input}
               onChange={(e) => setInput(e.target.value)}

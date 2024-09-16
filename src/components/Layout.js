@@ -29,18 +29,8 @@ function Layout({ children, title }) {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: 'background.default' }}>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography variant="h6" sx={{ flexGrow: 1 }}>
-              Neighbor AI
-            </Typography>
-            <Button color="inherit" component={Link} to="/">Home</Button>
-            <Button color="inherit" component={Link} to="/message">Chat</Button>
-            <Button color="inherit" component={Link} to="/call">Call</Button>
-          </Toolbar>
-        </AppBar>
-        <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', p: 3 }}>
-          {title && <Typography variant="h4" component="h1" gutterBottom>{title}</Typography>}
+        {/* AppBar removed from here */}
+        <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', p: 3, width: '100%', maxWidth: '100%' }}>
           {children}
         </Box>
       </Box>
