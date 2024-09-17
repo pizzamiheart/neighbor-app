@@ -111,7 +111,7 @@ function MessagePage() {
         </Typography>
       </Box>
       
-      <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', p: 1, overflowY: 'auto' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', p: 1, overflow: 'hidden', flexGrow: 1 }}>
         <Box sx={{ mb: 1, p: 1, bgcolor: 'background.paper', borderRadius: 1, boxShadow: 1 }}>
           <Typography variant="subtitle2" gutterBottom>Common Issues</Typography>
           <Grid container spacing={1}>
@@ -147,7 +147,8 @@ function MessagePage() {
             boxShadow: 1,
             display: 'flex',
             flexDirection: 'column-reverse',
-            height: '5vh' // Adjust this value to change the chat container height
+            height: '50px', // Adjust this value to change the chat container height
+            maxHeight: '150px' // Ensure it doesn't grow beyond this height
           }}
         >
           <Box>
