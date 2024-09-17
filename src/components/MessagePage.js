@@ -132,79 +132,85 @@ function MessagePage() {
         </Box>
         
         <Box 
-          ref={chatBoxRef}
           sx={{ 
             flexGrow: 1,
-            overflowY: 'auto',
-            p: 1,
-            mb: 1,
+            display: 'flex',
+            flexDirection: 'column',
             bgcolor: 'background.paper',
             borderRadius: 1,
             boxShadow: 1,
-            display: 'flex',
-            flexDirection: 'column-reverse',
-            minHeight: '150px', // Reduced minimum height
+            overflow: 'hidden',
           }}
         >
-          <Box>
-            {messages.map((message, index) => (
-              <Box 
-                key={index} 
-                sx={{ 
-                  mb: 1, 
-                  textAlign: message.sender.toLowerCase() === 'you' ? 'right' : 'left'
-                }}
-              >
-                <Typography 
-                  variant="body2" 
+          <Box 
+            ref={chatBoxRef}
+            sx={{ 
+              flexGrow: 1,
+              overflowY: 'auto',
+              p: 1,
+              display: 'flex',
+              flexDirection: 'column-reverse',
+            }}
+          >
+            <Box>
+              {messages.map((message, index) => (
+                <Box 
+                  key={index} 
                   sx={{ 
-                    display: 'inline-block',
-                    bgcolor: message.sender.toLowerCase() === 'you' ? 'primary.light' : 'grey.200',
-                    color: message.sender.toLowerCase() === 'you' ? 'white' : 'text.primary',
-                    p: 1,
-                    borderRadius: 1,
-                    maxWidth: '80%'
+                    mb: 1, 
+                    textAlign: message.sender.toLowerCase() === 'you' ? 'right' : 'left'
                   }}
                 >
-                  <strong>{message.sender}:</strong> {message.text}
-                </Typography>
-              </Box>
-            ))}
-            {isTyping && (
-              <Box sx={{ textAlign: 'left' }}>
-                <Typography variant="body2" sx={{ fontStyle: 'italic' }}>
-                  Neighbor is typing...
-                </Typography>
-              </Box>
-            )}
+                  <Typography 
+                    variant="body2" 
+                    sx={{ 
+                      display: 'inline-block',
+                      bgcolor: message.sender.toLowerCase() === 'you' ? 'primary.light' : 'grey.200',
+                      color: message.sender.toLowerCase() === 'you' ? 'white' : 'text.primary',
+                      p: 1,
+                      borderRadius: 1,
+                      maxWidth: '80%'
+                    }}
+                  >
+                    <strong>{message.sender}:</strong> {message.text}
+                  </Typography>
+                </Box>
+              ))}
+              {isTyping && (
+                <Box sx={{ textAlign: 'left' }}>
+                  <Typography variant="body2" sx={{ fontStyle: 'italic' }}>
+                    Neighbor is typing...
+                  </Typography>
+                </Box>
+              )}
+            </Box>
           </Box>
-        </Box>
-      </Box>
-      
-      <Box sx={{ 
-        p: .5, 
-        bgcolor: 'background.paper', 
-        borderTop: 1, 
-        borderColor: 'divider'
-      }}>
-        <Box sx={{ display: 'flex', gap: 1 }}>
-          <TextField
-            fullWidth
-            variant="outlined"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Type your question here..."
-            onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage(input)}
-            size="small"
-          />
-          <Button 
-            variant="contained" 
-            color="primary" 
-            onClick={() => sendMessage(input)}
-            sx={{ minWidth: '80px' }}
-          >
-            Send
-          </Button>
+          
+          <Box sx={{ 
+            p: 1, 
+            borderTop: 1, 
+            borderColor: 'divider'
+          }}>
+            <Box sx={{ display: 'flex', gap: 1 }}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Type your question here..."
+                onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage(input)}
+                size="small"
+              />
+              <Button 
+                variant="contained" 
+                color="primary" 
+                onClick={() => sendMessage(input)}
+                sx={{ minWidth: '80px' }}
+              >
+                Send
+              </Button>
+            </Box>
+          </Box>
         </Box>
       </Box>
       
@@ -227,6 +233,12 @@ function MessagePage() {
             <Button onClick={() => setShowPopup(false)} sx={{ mt: 1 }}>Close</Button>
           </Paper>
         </Box>
+      )}
+    </Box>
+  );
+}
+
+export default MessagePage;
       )}
     </Box>
   );
