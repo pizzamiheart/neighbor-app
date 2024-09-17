@@ -112,7 +112,7 @@ function MessagePage() {
                     onClick={() => handleCommonIssueClick(issue.prompt)}
                     sx={{ 
                       fontSize: '0.7rem',
-                      padding: '2px 4px',
+                      padding: '1.8px 3.8px',
                       width: '100%',
                       textTransform: 'none'
                     }}
