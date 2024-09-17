@@ -88,19 +88,21 @@ function MessagePage() {
 
   return (
     <Layout>
-      <Box sx={{ flexGrow: 1, width: '100%', display: 'flex', flexDirection: 'column', height: '100vh' }}>
+      <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
         <AppBar position="static">
-          <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Toolbar sx={{ justifyContent: 'space-between' }}>
+            <Typography variant="h6" component="div">
               Chat with Neighbor
             </Typography>
-            <Button color="inherit" component={Link} to="/">Home</Button>
-            <Button color="inherit" component={Link} to="/call">Call</Button>
+            <Box>
+              <Button color="inherit" component={Link} to="/" size="small">Home</Button>
+              <Button color="inherit" component={Link} to="/call" size="small">Call</Button>
+            </Box>
           </Toolbar>
         </AppBar>
-        <Box sx={{ flexGrow: 1, width: '100%', mx: 'auto', p: 2, display: 'flex', flexDirection: 'column' }}>
-          <Paper elevation={3} sx={{ mb: .5, p: .25 }}>
-            <Typography variant="subtitle1" gutterBottom>
+        <Box sx={{ flexGrow: 1, width: '100%', p: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+          <Paper elevation={3} sx={{ mb: 1, p: 1 }}>
+            <Typography variant="subtitle2" gutterBottom>
               Common Issues
             </Typography>
             <Grid container spacing={1}>
@@ -111,8 +113,8 @@ function MessagePage() {
                     size="small"
                     onClick={() => handleCommonIssueClick(issue.prompt)}
                     sx={{ 
-                      fontSize: '0.5rem',
-                      padding: '1.0px 3.0px',
+                      fontSize: '0.6rem',
+                      padding: '1px 2px',
                       width: '100%',
                       textTransform: 'none'
                     }}
@@ -128,8 +130,8 @@ function MessagePage() {
             sx={{ 
               flexGrow: 1,
               overflowY: 'auto',
-              p: .25,
-              mb: .5,
+              p: 1,
+              mb: 1,
               display: 'flex',
               flexDirection: 'column-reverse'
             }}
@@ -150,8 +152,8 @@ function MessagePage() {
                       display: 'inline-block',
                       bgcolor: message.sender.toLowerCase() === 'you' ? 'primary.light' : 'grey.200',
                       color: message.sender.toLowerCase() === 'you' ? 'white' : 'text.primary',
-                      p: .5,
-                      borderRadius: .5,
+                      p: 1,
+                      borderRadius: 1,
                       maxWidth: '80%'
                     }}
                   >
@@ -172,18 +174,19 @@ function MessagePage() {
             <TextField
               fullWidth
               multiline
-              rows={2}
+              rows={1}
               variant="outlined"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type your question here..."
               onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage(input)}
+              size="small"
             />
             <Button 
               variant="contained" 
               color="primary" 
               onClick={() => sendMessage(input)}
-              sx={{ alignSelf: 'flex-end' }}
+              sx={{ minWidth: 'auto', px: 2 }}
             >
               Send
             </Button>
