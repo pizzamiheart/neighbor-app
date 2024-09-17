@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Typography, Box, TextField, Button, AppBar, Toolbar, Grid } from '@mui/material';
+import './MessagePage.css';
+import Layout from './Layout';
+import { Typography, Box, TextField, Button, Paper, AppBar, Toolbar, useMediaQuery, useTheme, Grid } from '@mui/material';
 
 function MessagePage() {
   const theme = useTheme();
