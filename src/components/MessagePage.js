@@ -99,7 +99,7 @@ function MessagePage() {
           </Toolbar>
         </AppBar>
         <Box sx={{ flexGrow: 1, width: '100%', mx: 'auto', p: 2, display: 'flex', flexDirection: 'column' }}>
-          <Paper elevation={3} sx={{ mb: 2, p: 1 }}>
+          <Paper elevation={3} sx={{ mb: .5, p: .25 }}>
             <Typography variant="subtitle1" gutterBottom>
               Common Issues
             </Typography>
@@ -111,8 +111,8 @@ function MessagePage() {
                     size="small"
                     onClick={() => handleCommonIssueClick(issue.prompt)}
                     sx={{ 
-                      fontSize: '0.7rem',
-                      padding: '1.8px 3.8px',
+                      fontSize: '0.5rem',
+                      padding: '1.0px 3.0px',
                       width: '100%',
                       textTransform: 'none'
                     }}
@@ -128,8 +128,8 @@ function MessagePage() {
             sx={{ 
               flexGrow: 1,
               overflowY: 'auto',
-              p: 1,
-              mb: 2,
+              p: .25,
+              mb: .5,
               display: 'flex',
               flexDirection: 'column-reverse'
             }}
@@ -150,8 +150,8 @@ function MessagePage() {
                       display: 'inline-block',
                       bgcolor: message.sender.toLowerCase() === 'you' ? 'primary.light' : 'grey.200',
                       color: message.sender.toLowerCase() === 'you' ? 'white' : 'text.primary',
-                      p: 1,
-                      borderRadius: 1,
+                      p: .5,
+                      borderRadius: .5,
                       maxWidth: '80%'
                     }}
                   >
