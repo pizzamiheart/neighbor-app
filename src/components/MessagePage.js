@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './MessagePage.css';
 import Layout from './Layout';
-import { Typography, Box, TextField, Button, Paper, AppBar, Toolbar, useMediaQuery, useTheme } from '@mui/material';
+import { Typography, Box, TextField, Button, Paper, AppBar, Toolbar, useMediaQuery, useTheme, Grid } from '@mui/material';
 
 function MessagePage() {
   const theme = useTheme();
@@ -88,7 +88,7 @@ function MessagePage() {
 
   return (
     <Layout>
-      <Box sx={{ flexGrow: 1, width: '100%' }}>
+      <Box sx={{ flexGrow: 1, width: '100%', display: 'flex', flexDirection: 'column', height: '100vh' }}>
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -98,74 +98,81 @@ function MessagePage() {
             <Button color="inherit" component={Link} to="/call">Call</Button>
           </Toolbar>
         </AppBar>
-        <Box sx={{ width: '100%', mx: 'auto', p: 2 }}>
-          <Paper elevation={3} sx={{ mb: 2, p: 2 }}>
-            <Typography variant="h6" gutterBottom>
+        <Box sx={{ flexGrow: 1, width: '100%', mx: 'auto', p: 2, display: 'flex', flexDirection: 'column' }}>
+          <Paper elevation={3} sx={{ mb: 2, p: 1 }}>
+            <Typography variant="subtitle1" gutterBottom>
               Common Issues
             </Typography>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+            <Grid container spacing={1}>
               {commonIssues.map((issue, index) => (
-                <Button 
-                  key={index} 
-                  variant="outlined" 
-                  size={isMobile ? "small" : "medium"}
-                  onClick={() => handleCommonIssueClick(issue.prompt)}
-                  sx={{ 
-                    fontSize: isMobile ? '0.7rem' : '0.8rem',
-                    padding: isMobile ? '4px 8px' : '6px 16px',
-                    flexBasis: isMobile ? 'calc(50% - 4px)' : 'auto'
-                  }}
-                >
-                  {issue.label}
-                </Button>
+                <Grid item xs={6} key={index}>
+                  <Button 
+                    variant="outlined" 
+                    size="small"
+                    onClick={() => handleCommonIssueClick(issue.prompt)}
+                    sx={{ 
+                      fontSize: '0.7rem',
+                      padding: '2px 4px',
+                      width: '100%',
+                      textTransform: 'none'
+                    }}
+                  >
+                    {issue.label}
+                  </Button>
+                </Grid>
               ))}
-            </Box>
+            </Grid>
           </Paper>
           <Paper 
             elevation={3} 
             sx={{ 
-              height: { xs: 'calc(100vh - 300px)', sm: '60vh' }, 
+              flexGrow: 1,
               overflowY: 'auto',
-              p: 2,
-              mb: 2
+              p: 1,
+              mb: 2,
+              display: 'flex',
+              flexDirection: 'column-reverse'
             }}
             ref={chatBoxRef}
           >
-            {messages.map((message, index) => (
-              <Box 
-                key={index} 
-                sx={{ 
-                  mb: 1, 
-                  textAlign: message.sender.toLowerCase() === 'you' ? 'right' : 'left'
-                }}
-              >
-                <Typography 
-                  variant="body2" 
+            <Box>
+              {messages.map((message, index) => (
+                <Box 
+                  key={index} 
                   sx={{ 
-                    display: 'inline-block',
-                    bgcolor: message.sender.toLowerCase() === 'you' ? 'primary.light' : 'grey.200',
-                    color: message.sender.toLowerCase() === 'you' ? 'white' : 'text.primary',
-                    p: 1,
-                    borderRadius: 1
+                    mb: 1, 
+                    textAlign: message.sender.toLowerCase() === 'you' ? 'right' : 'left'
                   }}
                 >
-                  <strong>{message.sender}:</strong> {message.text}
-                </Typography>
-              </Box>
-            ))}
-            {isTyping && (
-              <Box sx={{ textAlign: 'left' }}>
-                <Typography variant="body2" sx={{ fontStyle: 'italic' }}>
-                  Neighbor is typing...
-                </Typography>
-              </Box>
-            )}
+                  <Typography 
+                    variant="body2" 
+                    sx={{ 
+                      display: 'inline-block',
+                      bgcolor: message.sender.toLowerCase() === 'you' ? 'primary.light' : 'grey.200',
+                      color: message.sender.toLowerCase() === 'you' ? 'white' : 'text.primary',
+                      p: 1,
+                      borderRadius: 1,
+                      maxWidth: '80%'
+                    }}
+                  >
+                    <strong>{message.sender}:</strong> {message.text}
+                  </Typography>
+                </Box>
+              ))}
+              {isTyping && (
+                <Box sx={{ textAlign: 'left' }}>
+                  <Typography variant="body2" sx={{ fontStyle: 'italic' }}>
+                    Neighbor is typing...
+                  </Typography>
+                </Box>
+              )}
+            </Box>
           </Paper>
           <Box sx={{ display: 'flex', gap: 1 }}>
             <TextField
               fullWidth
               multiline
-              rows={isMobile ? 2 : 3}
+              rows={2}
               variant="outlined"
               value={input}
               onChange={(e) => setInput(e.target.value)}
