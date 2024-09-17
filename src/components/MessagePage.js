@@ -147,7 +147,7 @@ function MessagePage() {
             boxShadow: 1,
             display: 'flex',
             flexDirection: 'column-reverse',
-            height: '30vh' // Adjust this value to change the chat container height
+            height: '15vh' // Adjust this value to change the chat container height
           }}
         >
           <Box>
