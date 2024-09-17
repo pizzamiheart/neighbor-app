@@ -104,24 +104,25 @@ function MessagePage() {
         </Toolbar>
       </AppBar>
       
-      <Box sx={{ p: 2, bgcolor: 'background.paper' }}>
-        <Typography variant="body1" align="center">
+      <Box sx={{ p: 1, bgcolor: 'background.paper' }}>
+        <Typography variant="body2" align="center">
           Here, you can message with your neighbor to help with your tech issues/questions. 
           Select from the common issues prompt, or type your own message in the box below to get started!
         </Typography>
       </Box>
       
-      <Box sx={{ display: 'flex', flexDirection: 'column', p: 2, flexGrow: 1, overflow: 'hidden' }}>
-        <Box sx={{ mb: 2, bgcolor: 'background.paper', borderRadius: 1, boxShadow: 1 }}>
-          <Typography variant="h6" sx={{ p: 1 }}>Common Issues</Typography>
-          <Grid container spacing={2} sx={{ p: 1 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', p: 1, flexGrow: 1, overflow: 'hidden' }}>
+        <Box sx={{ mb: 1, bgcolor: 'background.paper', borderRadius: 1, boxShadow: 1 }}>
+          <Typography variant="subtitle1" sx={{ p: 1 }}>Common Issues</Typography>
+          <Grid container spacing={1} sx={{ p: 0.5 }}>
             {commonIssues.map((issue, index) => (
               <Grid item xs={6} key={index}>
                 <Button 
                   variant="outlined" 
                   fullWidth
+                  size="small"
                   onClick={() => handleCommonIssueClick(issue.prompt)}
-                  sx={{ textTransform: 'none' }}
+                  sx={{ textTransform: 'none', fontSize: '0.75rem' }}
                 >
                   {issue.label}
                 </Button>
@@ -135,15 +136,14 @@ function MessagePage() {
           sx={{ 
             flexGrow: 1,
             overflowY: 'auto',
-            p: 2,
-            mb: 2,
+            p: 1,
+            mb: 1,
             bgcolor: 'background.paper',
             borderRadius: 1,
             boxShadow: 1,
             display: 'flex',
             flexDirection: 'column-reverse',
-            height: '100px', // Adjust this value to change the chat container height
-            maxHeight: '150px' // Ensure it doesn't grow beyond this height
+            minHeight: '150px', // Reduced minimum height
           }}
         >
           <Box>
@@ -182,12 +182,12 @@ function MessagePage() {
       </Box>
       
       <Box sx={{ 
-        p: 2, 
+        p: .5, 
         bgcolor: 'background.paper', 
         borderTop: 1, 
         borderColor: 'divider'
       }}>
-        <Box sx={{ display: 'flex', gap: 2 }}>
+        <Box sx={{ display: 'flex', gap: 1 }}>
           <TextField
             fullWidth
             variant="outlined"
@@ -195,12 +195,13 @@ function MessagePage() {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your question here..."
             onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage(input)}
+            size="small"
           />
           <Button 
             variant="contained" 
             color="primary" 
             onClick={() => sendMessage(input)}
-            sx={{ minWidth: '100px' }}
+            sx={{ minWidth: '80px' }}
           >
             Send
           </Button>
