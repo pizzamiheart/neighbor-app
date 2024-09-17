@@ -138,7 +138,6 @@ function MessagePage() {
         <Box 
           ref={chatBoxRef}
           sx={{ 
-            flexGrow: 1,
             overflowY: 'auto',
             p: 1,
             mb: 1,
@@ -147,7 +146,7 @@ function MessagePage() {
             boxShadow: 1,
             display: 'flex',
             flexDirection: 'column-reverse',
-            height: '50px', // Adjust this value to change the chat container height
+            height: '75px', // Adjust this value to change the chat container height
             maxHeight: '150px' // Ensure it doesn't grow beyond this height
           }}
         >
@@ -186,7 +185,13 @@ function MessagePage() {
         </Box>
       </Box>
       
-      <Box sx={{ p: 1, bgcolor: 'background.paper', borderTop: 1, borderColor: 'divider' }}>
+      <Box sx={{ 
+        p: 1, 
+        bgcolor: 'background.paper', 
+        borderTop: 1, 
+        borderColor: 'divider',
+        mt: 'auto' // This pushes the input field to the bottom
+      }}>
         <Box sx={{ display: 'flex', gap: 1 }}>
           <TextField
             fullWidth
