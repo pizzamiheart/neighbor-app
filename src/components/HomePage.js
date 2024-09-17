@@ -5,7 +5,8 @@ import {
 import { Link } from 'react-router-dom';
 import ChatIcon from '@mui/icons-material/Chat';
 import PhoneIcon from '@mui/icons-material/Phone';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import CancelIcon from '@mui/icons-material/Cancel';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 function HomePage() {
   const theme = useTheme();
@@ -18,7 +19,7 @@ function HomePage() {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'stretch',
-      px: 2,
+      px: { xs: 1, sm: 2 },
       py: 3,
       boxSizing: 'border-box',
       bgcolor: 'background.default'
@@ -69,15 +70,15 @@ function HomePage() {
       <Box sx={{ p: 2, mb: 3, bgcolor: 'background.paper', borderRadius: 1, boxShadow: 1, width: '100%', maxWidth: 600, mx: 'auto' }}>
         <Stack spacing={2}>
           <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-            <KeyboardArrowRightIcon color="primary" sx={{ mt: 0.5, mr: 1, flexShrink: 0 }} />
+            <CancelIcon color="error" sx={{ mt: 0.5, mr: 1, flexShrink: 0 }} />
             <Typography variant="body1" sx={{ textAlign: 'left' }}>Too many tech support numbers to keep up with</Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-            <KeyboardArrowRightIcon color="primary" sx={{ mt: 0.5, mr: 1, flexShrink: 0 }} />
+            <CancelIcon color="error" sx={{ mt: 0.5, mr: 1, flexShrink: 0 }} />
             <Typography variant="body1" sx={{ textAlign: 'left' }}>Business hours are limited</Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-            <KeyboardArrowRightIcon color="primary" sx={{ mt: 0.5, mr: 1, flexShrink: 0 }} />
+            <CancelIcon color="error" sx={{ mt: 0.5, mr: 1, flexShrink: 0 }} />
             <Typography variant="body1" sx={{ textAlign: 'left' }}>Family members are helpful, but getting quick answers is hard</Typography>
           </Box>
         </Stack>
@@ -89,15 +90,15 @@ function HomePage() {
       <Box sx={{ p: 2, bgcolor: 'background.paper', borderRadius: 1, boxShadow: 1, width: '100%', maxWidth: 600, mx: 'auto' }}>
         <Stack spacing={2}>
           <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-            <KeyboardArrowRightIcon color="primary" sx={{ mt: 0.5, mr: 1, flexShrink: 0 }} />
+            <CheckCircleIcon color="success" sx={{ mt: 0.5, mr: 1, flexShrink: 0 }} />
             <Typography variant="body1" sx={{ textAlign: 'left' }}>One number to call, one place to chat</Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-            <KeyboardArrowRightIcon color="primary" sx={{ mt: 0.5, mr: 1, flexShrink: 0 }} />
+            <CheckCircleIcon color="success" sx={{ mt: 0.5, mr: 1, flexShrink: 0 }} />
             <Typography variant="body1" sx={{ textAlign: 'left' }}>Infinite business hours, always available to help</Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-            <KeyboardArrowRightIcon color="primary" sx={{ mt: 0.5, mr: 1, flexShrink: 0 }} />
+            <CheckCircleIcon color="success" sx={{ mt: 0.5, mr: 1, flexShrink: 0 }} />
             <Typography variant="body1" sx={{ textAlign: 'left' }}>Quick answers from our friendly AI</Typography>
           </Box>
         </Stack>
