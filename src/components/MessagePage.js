@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import './MessagePage.css';
-import Layout from './Layout';
-import { Typography, Box, TextField, Button, Paper, AppBar, Toolbar, useMediaQuery, useTheme, Grid } from '@mui/material';
+import { Typography, Box, TextField, Button, AppBar, Toolbar, Grid } from '@mui/material';
 
 function MessagePage() {
   const theme = useTheme();
@@ -87,112 +85,117 @@ function MessagePage() {
   };
 
   return (
-    <Layout>
-      <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
-        <AppBar position="static">
-          <Toolbar sx={{ justifyContent: 'space-between' }}>
-            <Typography variant="h6" component="div">
-              Chat with Neighbor
-            </Typography>
-            <Box>
-              <Button color="inherit" component={Link} to="/" size="small">Home</Button>
-              <Button color="inherit" component={Link} to="/call" size="small">Call</Button>
-            </Box>
-          </Toolbar>
-        </AppBar>
-        <Box sx={{ flexGrow: 1, width: '100%', p: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-          <Paper elevation={3} sx={{ mb: 1, p: 1 }}>
-            <Typography variant="subtitle2" gutterBottom>
-              Common Issues
-            </Typography>
-            <Grid container spacing={1}>
-              {commonIssues.map((issue, index) => (
-                <Grid item xs={6} key={index}>
-                  <Button 
-                    variant="outlined" 
-                    size="small"
-                    onClick={() => handleCommonIssueClick(issue.prompt)}
-                    sx={{ 
-                      fontSize: '0.6rem',
-                      padding: '1px 2px',
-                      width: '100%',
-                      textTransform: 'none'
-                    }}
-                  >
-                    {issue.label}
-                  </Button>
-                </Grid>
-              ))}
-            </Grid>
-          </Paper>
-          <Paper 
-            elevation={3} 
-            sx={{ 
-              flexGrow: 1,
-              overflowY: 'auto',
-              p: 1,
-              mb: 1,
-              display: 'flex',
-              flexDirection: 'column-reverse'
-            }}
-            ref={chatBoxRef}
-          >
-            <Box>
-              {messages.map((message, index) => (
-                <Box 
-                  key={index} 
+    <Box sx={{ 
+      width: '100vw', 
+      height: '100vh', 
+      display: 'flex', 
+      flexDirection: 'column', 
+      overflow: 'hidden'
+    }}>
+      <AppBar position="static">
+        <Toolbar sx={{ justifyContent: 'space-between' }}>
+          <Typography variant="h6">Chat with Neighbor</Typography>
+          <Box>
+            <Button color="inherit" component={Link} to="/" size="small">Home</Button>
+            <Button color="inherit" component={Link} to="/call" size="small">Call</Button>
+          </Box>
+        </Toolbar>
+      </AppBar>
+      
+      <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', p: 1, overflowY: 'auto' }}>
+        <Box sx={{ mb: 1, p: 1, bgcolor: 'background.paper', borderRadius: 1, boxShadow: 1 }}>
+          <Typography variant="subtitle2" gutterBottom>Common Issues</Typography>
+          <Grid container spacing={1}>
+            {commonIssues.map((issue, index) => (
+              <Grid item xs={6} key={index}>
+                <Button 
+                  variant="outlined" 
+                  size="small"
+                  onClick={() => handleCommonIssueClick(issue.prompt)}
                   sx={{ 
-                    mb: 1, 
-                    textAlign: message.sender.toLowerCase() === 'you' ? 'right' : 'left'
+                    fontSize: '0.7rem',
+                    padding: '2px 4px',
+                    width: '100%',
+                    textTransform: 'none'
                   }}
                 >
-                  <Typography 
-                    variant="body2" 
-                    sx={{ 
-                      display: 'inline-block',
-                      bgcolor: message.sender.toLowerCase() === 'you' ? 'primary.light' : 'grey.200',
-                      color: message.sender.toLowerCase() === 'you' ? 'white' : 'text.primary',
-                      p: 1,
-                      borderRadius: 1,
-                      maxWidth: '80%'
-                    }}
-                  >
-                    <strong>{message.sender}:</strong> {message.text}
-                  </Typography>
-                </Box>
-              ))}
-              {isTyping && (
-                <Box sx={{ textAlign: 'left' }}>
-                  <Typography variant="body2" sx={{ fontStyle: 'italic' }}>
-                    Neighbor is typing...
-                  </Typography>
-                </Box>
-              )}
-            </Box>
-          </Paper>
-          <Box sx={{ display: 'flex', gap: 1 }}>
-            <TextField
-              fullWidth
-              multiline
-              rows={1}
-              variant="outlined"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Type your question here..."
-              onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage(input)}
-              size="small"
-            />
-            <Button 
-              variant="contained" 
-              color="primary" 
-              onClick={() => sendMessage(input)}
-              sx={{ minWidth: 'auto', px: 2 }}
-            >
-              Send
-            </Button>
+                  {issue.label}
+                </Button>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+        
+        <Box 
+          ref={chatBoxRef}
+          sx={{ 
+            flexGrow: 1,
+            overflowY: 'auto',
+            p: 1,
+            mb: 1,
+            bgcolor: 'background.paper',
+            borderRadius: 1,
+            boxShadow: 1,
+            display: 'flex',
+            flexDirection: 'column-reverse'
+          }}
+        >
+          <Box>
+            {messages.map((message, index) => (
+              <Box 
+                key={index} 
+                sx={{ 
+                  mb: 1, 
+                  textAlign: message.sender.toLowerCase() === 'you' ? 'right' : 'left'
+                }}
+              >
+                <Typography 
+                  variant="body2" 
+                  sx={{ 
+                    display: 'inline-block',
+                    bgcolor: message.sender.toLowerCase() === 'you' ? 'primary.light' : 'grey.200',
+                    color: message.sender.toLowerCase() === 'you' ? 'white' : 'text.primary',
+                    p: 1,
+                    borderRadius: 1,
+                    maxWidth: '80%'
+                  }}
+                >
+                  <strong>{message.sender}:</strong> {message.text}
+                </Typography>
+              </Box>
+            ))}
+            {isTyping && (
+              <Box sx={{ textAlign: 'left' }}>
+                <Typography variant="body2" sx={{ fontStyle: 'italic' }}>
+                  Neighbor is typing...
+                </Typography>
+              </Box>
+            )}
           </Box>
         </Box>
       </Box>
+      
+      <Box sx={{ p: 1, bgcolor: 'background.paper', borderTop: 1, borderColor: 'divider' }}>
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Type your question here..."
+            onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage(input)}
+            size="small"
+          />
+          <Button 
+            variant="contained" 
+            color="primary" 
+            onClick={() => sendMessage(input)}
+          >
+            Send
+          </Button>
+        </Box>
+      </Box>
+      
       {showPopup && (
         <Box 
           sx={{ 
@@ -213,7 +216,7 @@ function MessagePage() {
           </Paper>
         </Box>
       )}
-    </Layout>
+    </Box>
   );
 }
 
