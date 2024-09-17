@@ -1,6 +1,6 @@
 import React from 'react';
 import { 
-  Typography, Button, Box, Stack, useTheme, useMediaQuery, Paper, Container
+  Typography, Button, Box, Stack, useTheme, useMediaQuery
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import ChatIcon from '@mui/icons-material/Chat';
@@ -12,15 +12,16 @@ function HomePage() {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <Container disableGutters maxWidth={false} sx={{ 
+    <Box sx={{ 
+      width: '100%',
       minHeight: '100vh',
-      display: 'flex', 
-      flexDirection: 'column', 
+      display: 'flex',
+      flexDirection: 'column',
       alignItems: 'stretch',
-      px: { xs: 2, sm: 3, md: 4 },
+      px: 2,
       py: 3,
       boxSizing: 'border-box',
-      overflowX: 'hidden'
+      bgcolor: 'background.default'
     }}>
       <Typography variant={isMobile ? "h4" : "h3"} align="center" gutterBottom>
         Neighbor
@@ -29,7 +30,7 @@ function HomePage() {
         The always-available tech assistant for older adults
       </Typography>
       
-      <Stack spacing={2} sx={{ mb: 3, maxWidth: { sm: '400px' }, mx: 'auto', width: '100%' }}>
+      <Stack spacing={2} sx={{ mb: 3, width: '100%', maxWidth: 400, mx: 'auto' }}>
         <Button 
           variant="contained" 
           color="primary" 
@@ -65,43 +66,43 @@ function HomePage() {
       <Typography variant="h5" align="center" gutterBottom sx={{ mt: 2, mb: 1 }}>
         The Problem with Tech Support
       </Typography>
-      <Paper elevation={3} sx={{ p: 2, mb: 3, maxWidth: { sm: '600px' }, mx: 'auto', width: '100%' }}>
-        <Stack spacing={1}>
+      <Box sx={{ p: 2, mb: 3, bgcolor: 'background.paper', borderRadius: 1, boxShadow: 1, width: '100%', maxWidth: 600, mx: 'auto' }}>
+        <Stack spacing={2}>
           <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
             <KeyboardArrowRightIcon color="primary" sx={{ mt: 0.5, mr: 1, flexShrink: 0 }} />
-            <Typography variant="body1">Too many tech support numbers to keep up with</Typography>
+            <Typography variant="body1" sx={{ textAlign: 'left' }}>Too many tech support numbers to keep up with</Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
             <KeyboardArrowRightIcon color="primary" sx={{ mt: 0.5, mr: 1, flexShrink: 0 }} />
-            <Typography variant="body1">Business hours are limited</Typography>
+            <Typography variant="body1" sx={{ textAlign: 'left' }}>Business hours are limited</Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
             <KeyboardArrowRightIcon color="primary" sx={{ mt: 0.5, mr: 1, flexShrink: 0 }} />
-            <Typography variant="body1">Family members are helpful, but getting quick answers is hard</Typography>
+            <Typography variant="body1" sx={{ textAlign: 'left' }}>Family members are helpful, but getting quick answers is hard</Typography>
           </Box>
         </Stack>
-      </Paper>
+      </Box>
 
       <Typography variant="h5" align="center" gutterBottom sx={{ mt: 2, mb: 1 }}>
         Meet Neighbor
       </Typography>
-      <Paper elevation={3} sx={{ p: 2, maxWidth: { sm: '600px' }, mx: 'auto', width: '100%' }}>
-        <Stack spacing={1}>
+      <Box sx={{ p: 2, bgcolor: 'background.paper', borderRadius: 1, boxShadow: 1, width: '100%', maxWidth: 600, mx: 'auto' }}>
+        <Stack spacing={2}>
           <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
             <KeyboardArrowRightIcon color="primary" sx={{ mt: 0.5, mr: 1, flexShrink: 0 }} />
-            <Typography variant="body1">One number to call, one place to chat</Typography>
+            <Typography variant="body1" sx={{ textAlign: 'left' }}>One number to call, one place to chat</Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
             <KeyboardArrowRightIcon color="primary" sx={{ mt: 0.5, mr: 1, flexShrink: 0 }} />
-            <Typography variant="body1">Infinite business hours, always available to help</Typography>
+            <Typography variant="body1" sx={{ textAlign: 'left' }}>Infinite business hours, always available to help</Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
             <KeyboardArrowRightIcon color="primary" sx={{ mt: 0.5, mr: 1, flexShrink: 0 }} />
-            <Typography variant="body1">Quick answers from our friendly AI</Typography>
+            <Typography variant="body1" sx={{ textAlign: 'left' }}>Quick answers from our friendly AI</Typography>
           </Box>
         </Stack>
-      </Paper>
-    </Container>
+      </Box>
+    </Box>
   );
 }
 
