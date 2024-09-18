@@ -1,12 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import './MessagePage.css';
-import Layout from './Layout';
-import { Typography, Box, TextField, Button, Paper, AppBar, Toolbar, useMediaQuery, useTheme, Grid } from '@mui/material';
+import { Typography, Box, TextField, Button, AppBar, Toolbar, Grid } from '@mui/material';
 
 function MessagePage() {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -113,7 +109,7 @@ function MessagePage() {
       
       <Box sx={{ display: 'flex', flexDirection: 'column', p: 1, flexGrow: 1, overflow: 'hidden' }}>
         <Box sx={{ mb: 1, bgcolor: 'background.paper', borderRadius: 1, boxShadow: 1 }}>
-          <Typography variant="subtitle1" sx={{ p: 1 }}>Common Issues</Typography>
+          <Typography variant="subtitle2" sx={{ p: 0.5 }}>Common Issues</Typography>
           <Grid container spacing={1} sx={{ p: 0.5 }}>
             {commonIssues.map((issue, index) => (
               <Grid item xs={6} key={index}>
@@ -122,7 +118,7 @@ function MessagePage() {
                   fullWidth
                   size="small"
                   onClick={() => handleCommonIssueClick(issue.prompt)}
-                  sx={{ textTransform: 'none', fontSize: '0.75rem' }}
+                  sx={{ textTransform: 'none', fontSize: '0.7rem' }}
                 >
                   {issue.label}
                 </Button>
@@ -140,6 +136,7 @@ function MessagePage() {
             borderRadius: 1,
             boxShadow: 1,
             overflow: 'hidden',
+            maxHeight: 'calc(100vh - 300px)', // Adjust this value as needed
           }}
         >
           <Box 
@@ -157,7 +154,7 @@ function MessagePage() {
                 <Box 
                   key={index} 
                   sx={{ 
-                    mb: 1, 
+                    mb: 0.5, 
                     textAlign: message.sender.toLowerCase() === 'you' ? 'right' : 'left'
                   }}
                 >
@@ -167,9 +164,10 @@ function MessagePage() {
                       display: 'inline-block',
                       bgcolor: message.sender.toLowerCase() === 'you' ? 'primary.light' : 'grey.200',
                       color: message.sender.toLowerCase() === 'you' ? 'white' : 'text.primary',
-                      p: 1,
+                      p: 0.5,
                       borderRadius: 1,
-                      maxWidth: '80%'
+                      maxWidth: '80%',
+                      fontSize: '0.8rem'
                     }}
                   >
                     <strong>{message.sender}:</strong> {message.text}
@@ -178,7 +176,7 @@ function MessagePage() {
               ))}
               {isTyping && (
                 <Box sx={{ textAlign: 'left' }}>
-                  <Typography variant="body2" sx={{ fontStyle: 'italic' }}>
+                  <Typography variant="body2" sx={{ fontStyle: 'italic', fontSize: '0.8rem' }}>
                     Neighbor is typing...
                   </Typography>
                 </Box>
@@ -187,11 +185,11 @@ function MessagePage() {
           </Box>
           
           <Box sx={{ 
-            p: 1, 
+            p: 0.5, 
             borderTop: 1, 
             borderColor: 'divider'
           }}>
-            <Box sx={{ display: 'flex', gap: 1 }}>
+            <Box sx={{ display: 'flex', gap: 0.5 }}>
               <TextField
                 fullWidth
                 variant="outlined"
@@ -200,12 +198,13 @@ function MessagePage() {
                 placeholder="Type your question here..."
                 onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage(input)}
                 size="small"
+                sx={{ '& .MuiInputBase-input': { fontSize: '0.8rem', py: 0.5 } }}
               />
               <Button 
                 variant="contained" 
                 color="primary" 
                 onClick={() => sendMessage(input)}
-                sx={{ minWidth: '80px' }}
+                sx={{ minWidth: '60px', fontSize: '0.8rem', py: 0.5 }}
               >
                 Send
               </Button>
