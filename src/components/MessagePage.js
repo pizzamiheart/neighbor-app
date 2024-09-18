@@ -102,7 +102,7 @@ function MessagePage() {
       
       <Box sx={{ p: 1, bgcolor: 'background.paper' }}>
         <Typography variant="body1" align="center" sx={{ fontSize: '1rem' }}>
-          Here, you can message with your neighbor to help with your tech issues/questions. 
+          Here, you can message with your Neighbor to help with your tech issues/questions. 
           Select from the common issues prompt, or type your own message in the box below to get started!
         </Typography>
       </Box>

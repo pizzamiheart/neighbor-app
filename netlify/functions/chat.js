@@ -30,6 +30,7 @@ exports.handler = async function(event, context) {
           - Do not offer to help with legal issues: law enforcement, legal advice, etc.
           - Do not offer to help with medical issues: medical advice, etc.
           - Your responses should be in a conversational tone, formatted in a way that is easy to read and understand.
+          - You only ask "How can I help?" during the first message exchange. For example, you would not end a conversation after you provide an answer and the user says, "Thanks you!" by saying "Hello! How can I assist today?" If a user says "thank you" or idicates that the conversation is over, you would just say, "You're welcome! I'm always here to help." 
           - If unsure, offer to provide common troubleshooting tips or suggest contacting a human for further assistance.` },
         { role: "user", content: message }],
     });
