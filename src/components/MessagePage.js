@@ -239,9 +239,3 @@ function MessagePage() {
 }
 
 export default MessagePage;
-      )}
-    </Box>
-  );
-}
-
-export default MessagePage;
