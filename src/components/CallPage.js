@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './CallPage.css';
-import Layout from './Layout';
-import { Typography, Box, TextField, Button, Modal, AppBar, Toolbar } from '@mui/material';
+import { Typography, Box, TextField, Button, Modal, AppBar, Toolbar, Container } from '@mui/material';
 
 function CallPage() {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -47,9 +46,9 @@ function CallPage() {
   const handleCloseModal = () => setOpenModal(false);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
-          <Toolbar>
+    <Box sx={{ flexGrow: 1, minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <AppBar position="static">
+        <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Neighbor
           </Typography>
@@ -57,19 +56,11 @@ function CallPage() {
           <Button color="inherit" component={Link} to="/message">Chat</Button>
         </Toolbar>
       </AppBar>
-      <Box sx={{ 
-        maxWidth: 600, 
-        mx: 'auto', 
-        display: 'flex', 
-        flexDirection: 'column', 
-        justifyContent: 'center', 
-        height: 'calc(100vh - 64px)', 
-        p: 2
-      }}>
-        <Typography variant="h4" component="h1" gutterBottom align="center">
-          Ready to give your<br />Neighbor a call?
+      <Container maxWidth="sm" sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', py: 2 }}>
+        <Typography variant="h4" component="h1" gutterBottom sx={{ textAlign: { xs: 'left', sm: 'center' } }}>
+          Ready to give your Neighbor a call?
         </Typography>
-        <Typography variant="body1" paragraph>
+        <Typography variant="body1" paragraph sx={{ textAlign: { xs: 'left', sm: 'center' } }}>
           • You will receive a call in about 10 seconds.<br />
           • The call will come from an unknown number and a random city.<br />
           • Please ensure you allow calls from unknown numbers.<br />
@@ -90,16 +81,16 @@ function CallPage() {
           variant="contained" 
           color="primary" 
           onClick={initiateCall} 
-          sx={{ py: 1.5, px: 3, alignSelf: 'center', width: 'auto' }}
+          sx={{ py: 1.5, px: 3, alignSelf: { xs: 'stretch', sm: 'center' }, width: { xs: '100%', sm: 'auto' } }}
         >
           Start Call
         </Button>
         {callStatus && (
-          <Typography variant="body2" color="error" sx={{ mt: 2 }}>
+          <Typography variant="body2" color="error" sx={{ mt: 2, textAlign: 'center' }}>
             {callStatus}
           </Typography>
         )}
-      </Box>
+      </Container>
       <Modal
         open={openModal}
         onClose={handleCloseModal}
