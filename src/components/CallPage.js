@@ -48,12 +48,10 @@ function CallPage() {
   return (
     <Box sx={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column' }}>
       <AppBar position="static">
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Typography variant="h6">Neighbor</Typography>
-          <Box>
-            <Button color="inherit" component={Link} to="/" size="small">Home</Button>
-            <Button color="inherit" component={Link} to="/message" size="small">Chat</Button>
-          </Box>
+        <Toolbar>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>Neighbor</Typography>
+          <Button color="inherit" component={Link} to="/" size="small">Home</Button>
+          <Button color="inherit" component={Link} to="/message" size="small">Chat</Button>
         </Toolbar>
       </AppBar>
       <Box sx={{ 
@@ -65,40 +63,42 @@ function CallPage() {
         px: 2,
         overflowY: 'auto'
       }}>
-        <Typography variant="h4" component="h1" gutterBottom align="center" sx={{ fontSize: { xs: '1.5rem', sm: '2rem' } }}>
-          Ready to give your Neighbor a call?
-        </Typography>
-        <Typography variant="body1" paragraph align="center" sx={{ maxWidth: '100%', fontSize: { xs: '0.875rem', sm: '1rem' } }}>
-          • You will receive a call in about 10 seconds.<br />
-          • The call will come from an unknown number and a random city.<br />
-          • Please ensure you allow calls from unknown numbers.<br />
-          • If you have Do Not Disturb enabled, please turn it off.
-        </Typography>
-        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, width: '100%', maxWidth: '300px' }}>
-          <Typography variant="h6" sx={{ mr: 1 }}>+1</Typography>
-          <TextField
-            fullWidth
-            label="Phone Number"
-            variant="outlined"
-            value={phoneNumber}
-            onChange={handlePhoneChange}
-            placeholder="(123) 456-7890"
-            size="small"
-          />
-        </Box>
-        <Button 
-          variant="contained" 
-          color="primary" 
-          onClick={initiateCall} 
-          sx={{ py: 1, px: 3, width: '100%', maxWidth: '300px' }}
-        >
-          Start Call
-        </Button>
-        {callStatus && (
-          <Typography variant="body2" color="error" sx={{ mt: 2, textAlign: 'center' }}>
-            {callStatus}
+        <Box sx={{ width: '100%', maxWidth: '600px', margin: '0 auto' }}>
+          <Typography variant="h4" component="h1" gutterBottom align="center" sx={{ fontSize: { xs: '1.5rem', sm: '2rem' } }}>
+            Ready to give your Neighbor a call?
           </Typography>
-        )}
+          <Typography variant="body1" paragraph align="center" sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}>
+            • You will receive a call in about 10 seconds.<br />
+            • The call will come from an unknown number and a random city.<br />
+            • Please ensure you allow calls from unknown numbers.<br />
+            • If you have Do Not Disturb enabled, please turn it off.
+          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, width: '100%' }}>
+            <Typography variant="h6" sx={{ mr: 1 }}>+1</Typography>
+            <TextField
+              fullWidth
+              label="Phone Number"
+              variant="outlined"
+              value={phoneNumber}
+              onChange={handlePhoneChange}
+              placeholder="(123) 456-7890"
+              size="small"
+            />
+          </Box>
+          <Button 
+            variant="contained" 
+            color="primary" 
+            onClick={initiateCall} 
+            sx={{ py: 1, px: 3, width: '100%' }}
+          >
+            Start Call
+          </Button>
+          {callStatus && (
+            <Typography variant="body2" color="error" sx={{ mt: 2, textAlign: 'center' }}>
+              {callStatus}
+            </Typography>
+          )}
+        </Box>
       </Box>
       <Modal
         open={openModal}
