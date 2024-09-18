@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './CallPage.css';
-import { Typography, Box, TextField, Button, Modal, AppBar, Toolbar, Container } from '@mui/material';
+import { Typography, Box, TextField, Button, Modal, AppBar, Toolbar } from '@mui/material';
 
 function CallPage() {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -46,27 +46,35 @@ function CallPage() {
   const handleCloseModal = () => setOpenModal(false);
 
   return (
-    <Box sx={{ flexGrow: 1, minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <Box sx={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column' }}>
       <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Neighbor
-          </Typography>
-          <Button color="inherit" component={Link} to="/">Home</Button>
-          <Button color="inherit" component={Link} to="/message">Chat</Button>
+        <Toolbar sx={{ justifyContent: 'space-between' }}>
+          <Typography variant="h6">Neighbor</Typography>
+          <Box>
+            <Button color="inherit" component={Link} to="/" size="small">Home</Button>
+            <Button color="inherit" component={Link} to="/message" size="small">Chat</Button>
+          </Box>
         </Toolbar>
       </AppBar>
-      <Container maxWidth="sm" sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', py: 2 }}>
-        <Typography variant="h4" component="h1" gutterBottom sx={{ textAlign: { xs: 'left', sm: 'center' } }}>
+      <Box sx={{ 
+        flexGrow: 1, 
+        display: 'flex', 
+        flexDirection: 'column', 
+        justifyContent: 'center', 
+        alignItems: 'center',
+        px: 2,
+        overflowY: 'auto'
+      }}>
+        <Typography variant="h4" component="h1" gutterBottom align="center" sx={{ fontSize: { xs: '1.5rem', sm: '2rem' } }}>
           Ready to give your Neighbor a call?
         </Typography>
-        <Typography variant="body1" paragraph sx={{ textAlign: { xs: 'left', sm: 'center' } }}>
+        <Typography variant="body1" paragraph align="center" sx={{ maxWidth: '100%', fontSize: { xs: '0.875rem', sm: '1rem' } }}>
           • You will receive a call in about 10 seconds.<br />
           • The call will come from an unknown number and a random city.<br />
           • Please ensure you allow calls from unknown numbers.<br />
           • If you have Do Not Disturb enabled, please turn it off.
         </Typography>
-        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, width: '100%', maxWidth: '300px' }}>
           <Typography variant="h6" sx={{ mr: 1 }}>+1</Typography>
           <TextField
             fullWidth
@@ -75,13 +83,14 @@ function CallPage() {
             value={phoneNumber}
             onChange={handlePhoneChange}
             placeholder="(123) 456-7890"
+            size="small"
           />
         </Box>
         <Button 
           variant="contained" 
           color="primary" 
           onClick={initiateCall} 
-          sx={{ py: 1.5, px: 3, alignSelf: { xs: 'stretch', sm: 'center' }, width: { xs: '100%', sm: 'auto' } }}
+          sx={{ py: 1, px: 3, width: '100%', maxWidth: '300px' }}
         >
           Start Call
         </Button>
@@ -90,7 +99,7 @@ function CallPage() {
             {callStatus}
           </Typography>
         )}
-      </Container>
+      </Box>
       <Modal
         open={openModal}
         onClose={handleCloseModal}
