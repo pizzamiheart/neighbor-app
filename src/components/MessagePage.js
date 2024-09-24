@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { Link } from 'react-router-dom';
-import { Typography, Box, TextField, Button, AppBar, Toolbar, Grid } from '@mui/material';
+import { Typography, Box, TextField, Button, AppBar, Toolbar, Grid, Paper } from '@mui/material';
 
 function MessagePage() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [sessionId, setSessionId] = useState(null);
   const chatBoxRef = useRef(null);
 
   const commonIssues = [
@@ -15,6 +17,12 @@ function MessagePage() {
     { prompt: "How do I update my smartphone's operating system?", label: "Update Smartphone" },
     { prompt: "I'm running out of iCloud storage. What should I do?", label: "iCloud Storage" }
   ];
+
+  useEffect(() => {
+    const newSessionId = uuidv4();
+    setSessionId(newSessionId);
+    console.log("Generated sessionId:", newSessionId);  // Log the sessionId to the console
+  }, []);
 
   useEffect(() => {
     if (chatBoxRef.current) {
@@ -35,10 +43,15 @@ function MessagePage() {
       const response = await fetch('/.netlify/functions/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: message }),
+        body: JSON.stringify({ message, sessionId }),  // Include sessionId here
       });
       const data = await response.json();
-      await typeMessage(data.message, 'Neighbor');
+      if (response.ok) {
+        await typeMessage(data.message, 'Neighbor');
+      } else {
+        console.error('Error from server:', data.error);
+        addMessageToChat('Neighbor', "Sorry, I encountered an error. Please try again.");
+      }
     } catch (error) {
       console.error('Error sending message:', error);
       addMessageToChat('Neighbor', "Sorry, I encountered an error. Please try again.");
