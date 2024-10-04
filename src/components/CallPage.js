@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './CallPage.css';
-import { Typography, Box, TextField, Button, Modal, AppBar, Toolbar } from '@mui/material';
+import { Typography, Box, TextField, Button, Modal, Toolbar, AppBar } from '@mui/material';
 
 function CallPage() {
   const [phoneNumber, setPhoneNumber] = useState('');

@@ -23,13 +23,15 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html',
+      template: './build/index.html',
       filename: 'index.html'
-    })
+    }),
   ],
   devServer: {
     historyApiFallback: true,
-    contentBase: './build'
+    static: {
+      directory: path.join(__dirname, 'build'),
+    },
   },
   resolve: {
     extensions: ['.js', '.jsx']

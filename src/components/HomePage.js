@@ -28,7 +28,7 @@ function HomePage() {
         Neighbor
       </Typography>
       <Typography variant="subtitle1" align="center" paragraph sx={{ fontWeight: 'bold', mb: 2 }}>
-        The always-available tech assistant for older adults
+        The always-available tech assistant for older adults.
       </Typography>
       
       <Stack spacing={2} sx={{ mb: 3, width: '100%', maxWidth: 400, mx: 'auto' }}>

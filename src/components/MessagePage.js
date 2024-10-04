@@ -21,7 +21,7 @@ function MessagePage() {
   useEffect(() => {
     const newSessionId = uuidv4();
     setSessionId(newSessionId);
-    console.log("Generated sessionId:", newSessionId);  // Log the sessionId to the console
+    console.log("Generated sessionId:", newSessionId);
   }, []);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ function MessagePage() {
       const response = await fetch('/.netlify/functions/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message, sessionId }),  // Include sessionId here
+        body: JSON.stringify({ message, sessionId }),
       });
       const data = await response.json();
       if (response.ok) {
@@ -83,7 +83,7 @@ function MessagePage() {
           clearInterval(intervalId);
           resolve();
         }
-      }, 50); // Increased from 30 to 50 ms for slower typing
+      }, 50);
     });
   };
 
@@ -105,16 +105,16 @@ function MessagePage() {
     }}>
       <AppBar position="static">
         <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Typography variant="h6" sx={{ fontSize: '1.3rem' }}>Chat with Neighbor</Typography>
+          <Typography variant="h6" sx={{ fontSize: { xs: '1rem', sm: '1.3rem' } }}>Chat with Neighbor</Typography>
           <Box>
-            <Button color="inherit" component={Link} to="/" size="large" sx={{ fontSize: '1rem' }}>Home</Button>
-            <Button color="inherit" component={Link} to="/call" size="large" sx={{ fontSize: '1rem' }}>Call</Button>
+            <Button color="inherit" component={Link} to="/" size="small" sx={{ fontSize: { xs: '0.8rem', sm: '1rem' } }}>Home</Button>
+            <Button color="inherit" component={Link} to="/call" size="small" sx={{ fontSize: { xs: '0.8rem', sm: '1rem' } }}>Call</Button>
           </Box>
         </Toolbar>
       </AppBar>
       
       <Box sx={{ p: 1, bgcolor: 'background.paper' }}>
-        <Typography variant="body1" align="center" sx={{ fontSize: '1rem' }}>
+        <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.7rem', sm: '0.9rem' } }}>
           Here, you can message with your Neighbor to help with your tech issues/questions. 
           Select from the common issues prompt, or type your own message in the box below to get started!
         </Typography>
@@ -122,16 +122,16 @@ function MessagePage() {
       
       <Box sx={{ display: 'flex', flexDirection: 'column', p: 1, flexGrow: 1, overflow: 'hidden' }}>
         <Box sx={{ mb: 1, bgcolor: 'background.paper', borderRadius: 1, boxShadow: 1 }}>
-          <Typography variant="h6" sx={{ p: 1, fontSize: '1.2rem' }}>Common Issues</Typography>
+          <Typography variant="h6" sx={{ p: 1, fontSize: { xs: '0.9rem', sm: '1.1rem' } }}>Common Issues</Typography>
           <Grid container spacing={1} sx={{ p: 0.5 }}>
             {commonIssues.map((issue, index) => (
               <Grid item xs={6} key={index}>
                 <Button 
                   variant="outlined" 
                   fullWidth
-                  size="large"
+                  size="small"
                   onClick={() => handleCommonIssueClick(issue.prompt)}
-                  sx={{ textTransform: 'none', fontSize: '0.9rem', py: 1 }}
+                  sx={{ textTransform: 'none', fontSize: { xs: '0.6rem', sm: '0.8rem' }, py: 0.5 }}
                 >
                   {issue.label}
                 </Button>
@@ -149,7 +149,7 @@ function MessagePage() {
             borderRadius: 1,
             boxShadow: 1,
             overflow: 'hidden',
-            maxHeight: 'calc(100vh - 350px)', // Adjusted to accommodate larger elements
+            maxHeight: { xs: 'calc(100vh - 280px)', sm: 'calc(100vh - 320px)' },
           }}
         >
           <Box 
@@ -180,7 +180,7 @@ function MessagePage() {
                       p: 1,
                       borderRadius: 1,
                       maxWidth: '80%',
-                      fontSize: '1rem'
+                      fontSize: { xs: '0.8rem', sm: '1rem' }
                     }}
                   >
                     <strong>{message.sender}:</strong> {message.text}
@@ -189,7 +189,7 @@ function MessagePage() {
               ))}
               {isTyping && (
                 <Box sx={{ textAlign: 'left' }}>
-                  <Typography variant="body1" sx={{ fontStyle: 'italic', fontSize: '1rem' }}>
+                  <Typography variant="body1" sx={{ fontStyle: 'italic', fontSize: { xs: '0.8rem', sm: '1rem' } }}>
                     Neighbor is typing...
                   </Typography>
                 </Box>
@@ -210,14 +210,14 @@ function MessagePage() {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Type your question here..."
                 onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage(input)}
-                size="medium"
-                sx={{ '& .MuiInputBase-input': { fontSize: '1rem', py: 1 } }}
+                size="small"
+                sx={{ '& .MuiInputBase-input': { fontSize: { xs: '0.8rem', sm: '1rem' }, py: 0.5 } }}
               />
               <Button 
                 variant="contained" 
                 color="primary" 
                 onClick={() => sendMessage(input)}
-                sx={{ minWidth: '80px', fontSize: '1rem', py: 1 }}
+                sx={{ minWidth: '60px', fontSize: { xs: '0.8rem', sm: '1rem' }, py: 0.5 }}
               >
                 Send
               </Button>
@@ -241,8 +241,8 @@ function MessagePage() {
           }}
         >
           <Paper sx={{ p: 2, maxWidth: '80%' }}>
-            <Typography>Just a moment while your Neighbor finishes this thought!</Typography>
-            <Button onClick={() => setShowPopup(false)} sx={{ mt: 1 }}>Close</Button>
+            <Typography sx={{ fontSize: { xs: '0.8rem', sm: '1rem' } }}>Just a moment while your Neighbor finishes this thought!</Typography>
+            <Button onClick={() => setShowPopup(false)} sx={{ mt: 1, fontSize: { xs: '0.8rem', sm: '1rem' } }}>Close</Button>
           </Paper>
         </Box>
       )}
