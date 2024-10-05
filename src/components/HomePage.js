@@ -60,7 +60,7 @@ function HomePage() {
           fullWidth={isMobile}
           sx={{ minWidth: { sm: '200px' } }}
         >
-          Start Chat
+          Chat with Neighbor
         </Button>
         <Button
           variant="outlined"
@@ -72,7 +72,7 @@ function HomePage() {
           fullWidth={isMobile}
           sx={{ minWidth: { sm: '200px' } }}
         >
-          Start Call
+          Call Neighbor
         </Button>
       </Box>
       <Grid container spacing={3} sx={{ maxWidth: '900px', width: '100%' }}>
