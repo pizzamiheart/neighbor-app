@@ -1,15 +1,28 @@
 import React from 'react';
 import { 
-  Typography, Button, Box, Stack, useTheme, useMediaQuery
+  Typography, Button, Box, Grid, useTheme, useMediaQuery, Paper
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import ChatIcon from '@mui/icons-material/Chat';
 import PhoneIcon from '@mui/icons-material/Phone';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 function HomePage() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const positivePoints = [
+    'One number to call, one place to chat',
+    'Infinite business hours, always available to help',
+    'Quick answers from our friendly AI'
+  ];
+
+  const negativePoints = [
+    'Too many tech support numbers to keep up with',
+    'Business hours are limited',
+    'Family members are helpful, but getting quick answers is hard'
+  ];
 
   return (
     <Box sx={{ 
@@ -36,7 +49,7 @@ function HomePage() {
       }}>
         The always-available tech support assistant for older adults.
       </Typography>
-      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 2, sm: 3 }} sx={{ mb: { xs: 4, sm: 5 } }}>
+      <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 2, mb: { xs: 4, sm: 5 } }}>
         <Button
           variant="contained"
           color="primary"
@@ -61,22 +74,45 @@ function HomePage() {
         >
           Start Call
         </Button>
-      </Stack>
-      <Stack spacing={2} sx={{ maxWidth: '600px', width: '100%' }}>
-        {['One number to call, one place to chat', 
-          'Infinite business hours, always available to help', 
-          'Quick answers from our friendly AI'].map((text, index) => (
-          <Box key={index} sx={{ display: 'flex', alignItems: 'flex-start' }}>
-            <CheckCircleIcon color="success" sx={{ mt: 0.5, mr: 1, flexShrink: 0 }} />
-            <Typography variant="body1" sx={{ 
-              textAlign: 'left',
-              fontSize: { xs: '0.9rem', sm: '1rem', md: '1.1rem' }
-            }}>
-              {text}
+      </Box>
+      <Grid container spacing={3} sx={{ maxWidth: '900px', width: '100%' }}>
+        <Grid item xs={12} md={6}>
+          <Paper elevation={3} sx={{ p: 2, height: '100%' }}>
+            <Typography variant="h6" sx={{ mb: 2, fontSize: { xs: '1.1rem', sm: '1.25rem' } }}>
+              Common Tech Support Frustrations
             </Typography>
-          </Box>
-        ))}
-      </Stack>
+            {negativePoints.map((text, index) => (
+              <Box key={index} sx={{ display: 'flex', alignItems: 'flex-start', mb: 2 }}>
+                <CancelIcon color="error" sx={{ mt: 0.5, mr: 1, flexShrink: 0 }} />
+                <Typography variant="body1" sx={{ 
+                  textAlign: 'left',
+                  fontSize: { xs: '0.9rem', sm: '1rem', md: '1.1rem' }
+                }}>
+                  {text}
+                </Typography>
+              </Box>
+            ))}
+          </Paper>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Paper elevation={3} sx={{ p: 2, height: '100%' }}>
+            <Typography variant="h6" sx={{ mb: 2, fontSize: { xs: '1.1rem', sm: '1.25rem' } }}>
+              Neighbor's Solutions
+            </Typography>
+            {positivePoints.map((text, index) => (
+              <Box key={index} sx={{ display: 'flex', alignItems: 'flex-start', mb: 2 }}>
+                <CheckCircleIcon color="success" sx={{ mt: 0.5, mr: 1, flexShrink: 0 }} />
+                <Typography variant="body1" sx={{ 
+                  textAlign: 'left',
+                  fontSize: { xs: '0.9rem', sm: '1rem', md: '1.1rem' }
+                }}>
+                  {text}
+                </Typography>
+              </Box>
+            ))}
+          </Paper>
+        </Grid>
+      </Grid>
     </Box>
   );
 }
