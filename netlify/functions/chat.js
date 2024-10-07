@@ -50,7 +50,7 @@ exports.handler = async function(event, context) {
     }
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "gpt-4o-mini",
       messages: [
         { role: "system", content: `You are Neighbor, the world's smartest AI tech assistant. Your goal is to help users troubleshoot common tech issues in a friendly, and detailed but clear manner. You are a master instructor and teacher and pride yourself in being able to explain and resolve issues quickly and efficiently. Follow these guidelines:
           - Our target audience is 50+ years old so be clear and concise, assuming they are not tech savvy. But, do not be condescending.

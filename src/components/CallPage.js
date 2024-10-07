@@ -15,6 +15,13 @@ function CallPage() {
   };
 
   const initiateCall = async () => {
+    const userId = user ? user.uid : 'anonymous';
+    const allowed = await checkAndIncrementUsage(userId, 'call');
+    if (!allowed) {
+      setCallStatus('You have reached your call limit. Please upgrade to continue.');
+      return;
+    }
+
     const fullNumber = '+1' + phoneNumber.replace(/\D/g, '');
 
     if (fullNumber.length !== 12) {

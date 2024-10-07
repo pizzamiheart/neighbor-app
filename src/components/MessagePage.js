@@ -1,9 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Link } from 'react-router-dom';
 import { Typography, Box, TextField, Button, AppBar, Toolbar, Grid, Paper } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { auth } from '../firebase';
 
-function MessagePage() {
+function MessagePage({ user }) {
+  const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -31,6 +34,8 @@ function MessagePage() {
   }, [messages]);  
 
   const sendMessage = async (message) => {
+    if (message.trim() === '') return;
+
     if (isTyping) {
       setShowPopup(true);
       return;
@@ -104,14 +109,14 @@ function MessagePage() {
       overflow: 'hidden'
     }}>
       <AppBar position="static">
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Typography variant="h6" sx={{ fontSize: { xs: '1rem', sm: '1.3rem' } }}>Chat with Neighbor</Typography>
-          <Box>
-            <Button color="inherit" component={Link} to="/" size="small" sx={{ fontSize: { xs: '0.8rem', sm: '1rem' } }}>Home</Button>
-            <Button color="inherit" component={Link} to="/call" size="small" sx={{ fontSize: { xs: '0.8rem', sm: '1rem' } }}>Call</Button>
-          </Box>
+        <Toolbar>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>Neighbor</Typography>
+          <Button color="inherit" component={Link} to="/" size="small">Home</Button>
+          <Button color="inherit" component={Link} to="/call" size="small">Call</Button>
         </Toolbar>
       </AppBar>
+
+      <Typography variant="h6" sx={{ mb: 2, fontSize: { xs: '1rem', sm: '1.3rem' } }}>Chat with Neighbor</Typography>
       
       <Box sx={{ p: 1, bgcolor: 'background.paper' }}>
         <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.7rem', sm: '0.9rem' } }}>
