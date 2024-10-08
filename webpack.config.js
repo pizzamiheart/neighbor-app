@@ -4,15 +4,6 @@ const webpack = require('webpack');
 const dotenv = require('dotenv');
 dotenv.config();
 
-// call dotenv and it will return an Object with a parsed key 
-const env = dotenv.config().parsed;
-
-// reduce it to a nice object, the same as before
-const envKeys = Object.keys(env).reduce((prev, next) => {
-  prev[`process.env.${next}`] = JSON.stringify(env[next]);
-  return prev;
-}, {});
-
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -40,13 +31,15 @@ module.exports = {
       inject: 'body' // This ensures the script is injected into the <body> tag
     }),
     new webpack.EnvironmentPlugin({
-      REACT_APP_FIREBASE_API_KEY: '',
-      REACT_APP_FIREBASE_AUTH_DOMAIN: '',
-      REACT_APP_FIREBASE_PROJECT_ID: '',
-      REACT_APP_FIREBASE_STORAGE_BUCKET: '',
-      REACT_APP_FIREBASE_MESSAGING_SENDER_ID: '',
-      REACT_APP_FIREBASE_APP_ID: '',
-      REACT_APP_FIREBASE_MEASUREMENT_ID: ''
+      REACT_APP_FIREBASE_API_KEY: process.env.REACT_APP_FIREBASE_API_KEY,
+      REACT_APP_FIREBASE_AUTH_DOMAIN: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+      REACT_APP_FIREBASE_PROJECT_ID: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+      REACT_APP_FIREBASE_STORAGE_BUCKET: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+      REACT_APP_FIREBASE_MESSAGING_SENDER_ID: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+      REACT_APP_FIREBASE_APP_ID: process.env.REACT_APP_FIREBASE_APP_ID,
+      REACT_APP_FIREBASE_MEASUREMENT_ID: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+      // Explicitly set OPENAI_API_KEY to undefined to ensure it's not included
+      OPENAI_API_KEY: undefined
     })
   ],
   devServer: {
